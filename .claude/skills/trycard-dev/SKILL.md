@@ -200,6 +200,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File $p\tools\run_tests.ps1      
 - 確認：`build\windows\TryCard.console.exe --headless --quit-after 600`（エラーが出ないか）と、ウィンドウありで `--quit-after 900`。
 - **落とし穴（実測）**：release テンプレートは `--main-pack` を拒否し（`compiled without overrides`）、`-s <script>` も実行されずに普通にゲームが起動して待ち続ける。debug テンプレートに同名の pck を置いても GUT は始まらなかった。書き出した物の中で GUT を回す方法は無いものとして、確認は上の起動と手で遊ぶことで行う。
 
+## Git / GitHub（2026-10-26〜）
+- リモートは **公開** リポジトリ `https://github.com/MatrixChoGenko/AiKadaiGodot_Cho`（`main`）。git の書き込み操作はセッションごとにユーザーの許可が要る。
+- `.gitignore` で除外：`.godot/`・`build/`・`*.zip`・`__pycache__/`、それに**公開できない素材** `map_paper.png`（EULA §3.2）と EULA の PDF、`cursor_stone_green.png`（ライセンス表記なし）とその `.import`。これらは各 PC に手でコピーする。無くても `map_screen.gd` は `PaperFallback` の紙色、`main.gd` は OS 標準カーソルで動く（`preload` に戻すと clone しただけの PC で起動しなくなる）。
+- **素材を足すときは、ライセンスが公開リポジトリへの配置を許すか先に確かめる**。だめなら `.gitignore` に足し、`ResourceLoader.exists` で代わりの見た目を用意する。
+- `.gitattributes` で LF に統一（`.ps1` だけ CRLF）。`*.import` と `*.uid` は必ずコミットする。LFS は使っていない（最大のファイルでも約 3MB）。
+- 別の PC：Godot 4.7.2 を `D:\Tools\Godot\` に置く → `git clone` → 制限のある素材をコピー → Godot で 1 回開いて取り込みを待つ → `tools\run_tests.ps1 -Select test_main_scene` で確認する。
+
 ## タイトル画面（StS2 に合わせた。2026-10-21）
 - `MainMenuScreen`：背景は `assets/textures/backgrounds/title_campfire.jpg`（1920×1072）。上にロゴ（`python -I tools/title_logo.py` → `assets/textures/ui/title/logo.png`。仮のタイトル「Sxxx the SXXX」。文言は `LINES` で変える）。メニューは文字だけのボタン（テーマの `ButtonTitle`。ホバーで金色になり 1.08 倍）。デバッグ用の部品（シード・全カード）は右下の `DebugPanel` にまとめ、デバッグビルドでだけ出す。
 - 背景の動き：空がうねる（`title_sky.gdshader`。UV の y が `sky_bottom` より上だけ）、霧と漂う光（戦闘背景のシェーダーを使い回す）、焚き火の炎・光・火の粉（休憩所と同じ部品。`RestScreen.make_embers()`）、塔の灯りの明滅（`campfire_glow` をゆっくりにしたもの）。位置は絵の px（`FLAME_RECT` など）。絵を差し替えたら測り直す。
