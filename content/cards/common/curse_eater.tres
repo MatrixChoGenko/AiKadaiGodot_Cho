@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/curse_eater.png" id="1_a26sx"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_dcy63"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_a26sx"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_rkh5e"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/hand_has_type_condition.gd" id="4_17238"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_87xhg"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_stwnp"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_2y4de"]
+
+[sub_resource type="Resource" id="Resource_c2ll5"]
+script = ExtResource("2_a26sx")
+value = 8
+
+[sub_resource type="Resource" id="Resource_k56tp"]
+script = ExtResource("2_a26sx")
+value = 16
+
+[sub_resource type="Resource" id="Resource_210d1"]
+script = ExtResource("4_17238")
+type_filter = 24
+
+[sub_resource type="Resource" id="Resource_80vuy"]
+script = ExtResource("3_rkh5e")
+when = SubResource("Resource_210d1")
+then = SubResource("Resource_k56tp")
+otherwise = SubResource("Resource_c2ll5")
+
+[sub_resource type="Resource" id="Resource_jexbr"]
+script = ExtResource("5_87xhg")
+amount = SubResource("Resource_80vuy")
+label = &"damage"
+target = ExtResource("6_stwnp")
+
+[resource]
+script = ExtResource("7_2y4de")
+id = &"curse_eater"
+name = "心喰い"
+art = ExtResource("1_a26sx")
+art_focus = 0.4
+aim = 1
+on_play = Array[ExtResource("1_dcy63")]([SubResource("Resource_jexbr")])
+text = "{damage} ダメージを与える（手札にステータスカードか呪いがあれば 16）。"

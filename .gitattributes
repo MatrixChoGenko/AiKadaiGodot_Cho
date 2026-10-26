@@ -1,0 +1,25 @@
+# テキストは LF で統一する（Godot が LF で書くため。autocrlf の設定が PC ごとに違っても差分が出ないように）
+* text=auto eol=lf
+
+# Windows のスクリプトは CRLF
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# バイナリ
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.glb binary
+*.bin binary
+*.ttf binary
+*.otf binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.pdf binary
+*.zip binary
+*.res binary
+*.scn binary

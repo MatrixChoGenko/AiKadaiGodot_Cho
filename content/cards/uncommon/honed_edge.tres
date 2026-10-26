@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/honed_edge.png" id="1_u4c0x"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_vbtr0"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_u4c0x"]
+[ext_resource type="Script" path="res://src/content/values/impl/card_growth_value.gd" id="3_xlipj"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_5g1qj"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_2j6yi"]
+[ext_resource type="Script" path="res://src/content/effects/impl/grow_card_effect.gd" id="6_38ctb"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_n3m4q"]
+
+[sub_resource type="Resource" id="Resource_ts8p1"]
+script = ExtResource("3_xlipj")
+
+[sub_resource type="Resource" id="Resource_m8l7l"]
+script = ExtResource("2_u4c0x")
+base = 5
+unit = SubResource("Resource_ts8p1")
+
+[sub_resource type="Resource" id="Resource_58ido"]
+script = ExtResource("4_5g1qj")
+amount = SubResource("Resource_m8l7l")
+label = &"damage"
+target = ExtResource("5_2j6yi")
+
+[sub_resource type="Resource" id="Resource_kinoo"]
+script = ExtResource("6_38ctb")
+amount = 3
+
+[resource]
+script = ExtResource("7_n3m4q")
+id = &"honed_edge"
+name = "研ぎ澄まし"
+art = ExtResource("1_u4c0x")
+rarity = 2
+aim = 1
+on_play = Array[ExtResource("1_vbtr0")]([SubResource("Resource_58ido"), SubResource("Resource_kinoo")])
+text = "{damage} ダメージを与える。この戦闘中、プレイするたびにダメージ +3。"

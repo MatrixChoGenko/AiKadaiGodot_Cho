@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/ambush.png" id="1_163h5"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_urv0x"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_163h5"]
+[ext_resource type="Script" path="res://src/content/values/impl/hand_count_value.gd" id="3_bxuvb"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_7x324"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_bq3b7"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_bs6pm"]
+[ext_resource type="Resource" path="res://content/cards/uncommon/ambush_plus.tres" id="7_lm2yc"]
+
+[sub_resource type="Resource" id="Resource_1tf8c"]
+script = ExtResource("3_bxuvb")
+
+[sub_resource type="Resource" id="Resource_mdx6e"]
+script = ExtResource("2_163h5")
+per = 3
+unit = SubResource("Resource_1tf8c")
+
+[sub_resource type="Resource" id="Resource_3xn71"]
+script = ExtResource("4_7x324")
+amount = SubResource("Resource_mdx6e")
+label = &"damage"
+target = ExtResource("5_bq3b7")
+
+[resource]
+script = ExtResource("6_bs6pm")
+id = &"ambush"
+name = "待ち伏せ"
+art = ExtResource("1_163h5")
+rarity = 2
+cost = 2
+aim = 1
+keywords = 2
+upgraded = ExtResource("7_lm2yc")
+on_play = Array[ExtResource("1_urv0x")]([SubResource("Resource_3xn71")])
+text = "{damage} ダメージを与える（手札 1 枚につき 3）。"

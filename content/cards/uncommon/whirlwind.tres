@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/whirlwind.png" id="1_5f0fb"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_tnom4"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_5f0fb"]
+[ext_resource type="Script" path="res://src/content/values/impl/x_value.gd" id="3_ocntg"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_r40qu"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="5_68trm"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_ujhrl"]
+
+[sub_resource type="Resource" id="Resource_yvoc2"]
+script = ExtResource("2_5f0fb")
+value = 5
+
+[sub_resource type="Resource" id="Resource_tf1rw"]
+script = ExtResource("3_ocntg")
+
+[sub_resource type="Resource" id="Resource_sa3qu"]
+script = ExtResource("4_r40qu")
+amount = SubResource("Resource_yvoc2")
+hits = SubResource("Resource_tf1rw")
+label = &"damage"
+target = ExtResource("5_68trm")
+
+[resource]
+script = ExtResource("6_ujhrl")
+id = &"whirlwind"
+name = "旋風刃"
+art = ExtResource("1_5f0fb")
+rarity = 2
+cost_mode = 1
+cost = 0
+on_play = Array[ExtResource("1_tnom4")]([SubResource("Resource_sa3qu")])
+text = "敵全体に {damage} ダメージを X 回与える。"

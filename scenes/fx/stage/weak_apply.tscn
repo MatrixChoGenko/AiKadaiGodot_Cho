@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_swirl.png" id="2_fx_swirl"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_arrow.png" id="3_fx_arrow"]
+
+[sub_resource type="Curve" id="Curve_Swirl"]
+_data = [Vector2(0.0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.2, 1.0), 0.0, 0.0, 0, 0, Vector2(0.8, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.6), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_Swirl"]
+curve = SubResource("Curve_Swirl")
+
+[sub_resource type="Gradient" id="Gradient_Swirl"]
+offsets = PackedFloat32Array(0.0, 0.7, 1.0)
+colors = PackedColorArray(0.85, 0.6, 1.0, 1.0, 0.6, 0.35, 0.9, 0.95, 0.5, 0.25, 0.8, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Swirl"]
+gradient = SubResource("Gradient_Swirl")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Swirl"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -420.0
+angular_velocity_max = -420.0
+scale_min = 1.1
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_Swirl")
+color_ramp = SubResource("GradientTexture_Swirl")
+
+[sub_resource type="StandardMaterial3D" id="Material_Swirl"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_swirl")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Swirl"]
+material = SubResource("Material_Swirl")
+
+[sub_resource type="Curve" id="Curve_Arrows"]
+_data = [Vector2(0.0, 0.6), 0.0, 0.0, 0, 0, Vector2(0.15, 1.0), 0.0, 0.0, 0, 0, Vector2(0.8, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.6), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_Arrows"]
+curve = SubResource("Curve_Arrows")
+
+[sub_resource type="Gradient" id="Gradient_Arrows"]
+offsets = PackedFloat32Array(0.0, 0.15, 0.7, 1.0)
+colors = PackedColorArray(0.9, 0.7, 1.0, 0.0, 0.75, 0.5, 1.0, 1.0, 0.6, 0.35, 0.9, 1.0, 0.5, 0.25, 0.8, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Arrows"]
+gradient = SubResource("Gradient_Arrows")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Arrows"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.6, 0.1, 0)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 1.2
+initial_velocity_max = 1.8
+gravity = Vector3(0, 0, 0)
+scale_min = 0.45
+scale_max = 0.55
+scale_curve = SubResource("CurveTexture_Arrows")
+color_ramp = SubResource("GradientTexture_Arrows")
+
+[sub_resource type="StandardMaterial3D" id="Material_Arrows"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_fx_arrow")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Arrows"]
+material = SubResource("Material_Arrows")
+
+[node name="WeakApply" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Swirl" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+emitting = false
+amount = 1
+lifetime = 0.9
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Swirl")
+draw_pass_1 = SubResource("Quad_Swirl")
+
+[node name="Arrows" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 3
+lifetime = 0.75
+one_shot = true
+local_coords = true
+explosiveness = 0.6
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Arrows")
+draw_pass_1 = SubResource("Quad_Arrows")

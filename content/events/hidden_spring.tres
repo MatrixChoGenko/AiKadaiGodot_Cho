@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EventData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/event_option.gd" id="1_8cfjy"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_effect.gd" id="2_ub2po"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/max_hp_run_effect.gd" id="3_cm5gx"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/branch_run_effect.gd" id="4_btw77"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/heal_missing_percent_run_effect.gd" id="5_nykka"]
+[ext_resource type="Script" path="res://src/content/run_effects/conditions/hp_below_percent_run_condition.gd" id="6_sp2sc"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/gold_run_effect.gd" id="7_4vpgc"]
+[ext_resource type="Script" path="res://src/content/data/event_data.gd" id="8_u7hvm"]
+
+[sub_resource type="Resource" id="Resource_40e7g"]
+script = ExtResource("3_cm5gx")
+amount = 5
+
+[sub_resource type="Resource" id="Resource_cenr1"]
+script = ExtResource("5_nykka")
+percent = 40
+
+[sub_resource type="Resource" id="Resource_pg13g"]
+script = ExtResource("6_sp2sc")
+
+[sub_resource type="Resource" id="Resource_ff3so"]
+script = ExtResource("4_btw77")
+when = SubResource("Resource_pg13g")
+then = Array[ExtResource("2_ub2po")]([SubResource("Resource_cenr1")])
+otherwise = Array[ExtResource("2_ub2po")]([SubResource("Resource_40e7g")])
+
+[sub_resource type="Resource" id="Resource_hxfd5"]
+script = ExtResource("1_8cfjy")
+text = "飲み干す"
+detail = "HP が 50% 未満なら失った HP の 40% を回復、そうでなければ最大 HP +5"
+effects = Array[ExtResource("2_ub2po")]([SubResource("Resource_ff3so")])
+result_text = "冷たい水が体に染み渡る。"
+
+[sub_resource type="Resource" id="Resource_18ckv"]
+script = ExtResource("7_4vpgc")
+amount = 25
+
+[sub_resource type="Resource" id="Resource_hx822"]
+script = ExtResource("1_8cfjy")
+text = "水筒を満たす"
+detail = "+25 ゴールド"
+effects = Array[ExtResource("2_ub2po")]([SubResource("Resource_18ckv")])
+result_text = "あなたは水を売ることにした。"
+
+[resource]
+script = ExtResource("8_u7hvm")
+id = &"hidden_spring"
+title = "秘められた泉"
+body = "岩の割れ目から、澄んだ水が湧き出している。"
+options = Array[ExtResource("1_8cfjy")]([SubResource("Resource_hxfd5"), SubResource("Resource_hx822")])

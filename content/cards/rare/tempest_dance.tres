@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/tempest_dance.png" id="1_0g0ok"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_86uhm"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_0g0ok"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_1pb1k"]
+[ext_resource type="Resource" path="res://content/presets/target_random_enemy.tres" id="4_j41mp"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="5_7sr5f"]
+[ext_resource type="Script" path="res://src/content/effects/impl/repeat_effect.gd" id="6_s2dkx"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_47ph3"]
+
+[sub_resource type="Resource" id="Resource_6b1s0"]
+script = ExtResource("2_0g0ok")
+value = 5
+
+[sub_resource type="Resource" id="Resource_yjm40"]
+script = ExtResource("3_1pb1k")
+amount = SubResource("Resource_6b1s0")
+label = &"damage"
+target = ExtResource("4_j41mp")
+
+[sub_resource type="Resource" id="Resource_56vsf"]
+script = ExtResource("2_0g0ok")
+value = 3
+
+[sub_resource type="Resource" id="Resource_5bel0"]
+script = ExtResource("5_7sr5f")
+amount = SubResource("Resource_56vsf")
+label = &"block"
+
+[sub_resource type="Resource" id="Resource_38idf"]
+script = ExtResource("2_0g0ok")
+value = 2
+
+[sub_resource type="Resource" id="Resource_n68fw"]
+script = ExtResource("6_s2dkx")
+times = SubResource("Resource_38idf")
+effects = Array[ExtResource("1_86uhm")]([SubResource("Resource_yjm40"), SubResource("Resource_5bel0")])
+
+[resource]
+script = ExtResource("7_47ph3")
+id = &"tempest_dance"
+name = "嵐の舞"
+art = ExtResource("1_0g0ok")
+type = 1
+rarity = 3
+cost = 2
+on_play = Array[ExtResource("1_86uhm")]([SubResource("Resource_n68fw")])
+text = "ランダムな敵に {damage} ダメージを与え、ブロックを {block} 得る。これを 2 回繰り返す。"

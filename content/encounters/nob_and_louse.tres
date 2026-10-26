@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EncounterData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="1_d60e7"]
+[ext_resource type="Resource" path="res://content/enemies/gremlin_nob.tres" id="2_wklpp"]
+[ext_resource type="Resource" path="res://content/enemies/louse.tres" id="3_5yk8f"]
+[ext_resource type="Script" path="res://src/content/data/encounter_data.gd" id="4_ex2t6"]
+
+[resource]
+script = ExtResource("4_ex2t6")
+id = &"nob_and_louse"
+name = "巨像と取り巻き"
+rank = 1
+enemies = Array[ExtResource("1_d60e7")]([ExtResource("2_wklpp"), ExtResource("3_5yk8f")])

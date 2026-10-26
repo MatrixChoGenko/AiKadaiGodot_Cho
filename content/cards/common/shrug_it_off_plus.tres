@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_4iy1k"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/shrug_it_off.png" id="1_48kp8"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_48kp8"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_atdvy"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_vgyp2"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_hyfub"]
+
+[sub_resource type="Resource" id="Resource_gpoj6"]
+script = ExtResource("2_48kp8")
+value = 11
+
+[sub_resource type="Resource" id="Resource_j22hq"]
+script = ExtResource("3_atdvy")
+amount = SubResource("Resource_gpoj6")
+label = &"block"
+
+[sub_resource type="Resource" id="Resource_b607f"]
+script = ExtResource("2_48kp8")
+value = 1
+
+[sub_resource type="Resource" id="Resource_s6apf"]
+script = ExtResource("4_vgyp2")
+count = SubResource("Resource_b607f")
+
+[resource]
+script = ExtResource("5_hyfub")
+id = &"shrug_it_off_plus"
+name = "受け流し+"
+art = ExtResource("1_48kp8")
+type = 1
+rarity = 4
+on_play = Array[ExtResource("1_4iy1k")]([SubResource("Resource_j22hq"), SubResource("Resource_s6apf")])
+text = "ブロックを {block} 得て、1 枚引く。"

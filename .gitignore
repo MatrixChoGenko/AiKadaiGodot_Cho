@@ -1,0 +1,30 @@
+# Godot のキャッシュ（開いたときに作り直される）
+.godot/
+*.translation
+
+# 書き出した exe / zip（配布は Releases などで）
+build/
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# 公開リポジトリに置けない素材（各 PC に手でコピーする。無くてもゲームは代わりの見た目で動く）
+#  - map_paper.png：Evalynn の EULA §3.2 が公開リポジトリへの配置を禁止
+#  - cursor_stone_green.png：Wenrexa の配布物にライセンス表記が無い
+/assets/textures/backgrounds/map_paper.png
+/assets/textures/backgrounds/map_paper.png.import
+/assets/textures/backgrounds/LICENSE_map_paper_evalynn_EULA.pdf
+/assets/textures/ui/cursor_stone_green.png
+/assets/textures/ui/cursor_stone_green.png.import
+
+# Claude Code の個人設定
+.claude/settings.local.json
+
+# OS / エディタ
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.orig

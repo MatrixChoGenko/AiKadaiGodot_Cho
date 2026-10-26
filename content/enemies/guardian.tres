@@ -1,0 +1,162 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_1yg8t"]
+[ext_resource type="Script" path="res://src/content/effects/impl/remove_statuses_effect.gd" id="2_0tett"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="3_522by"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="4_dxhcw"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="5_p0ehc"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="6_1g177"]
+[ext_resource type="Script" path="res://src/content/ai/impl/scripted_ai.gd" id="7_judps"]
+[ext_resource type="Script" path="res://src/content/data/enemy_move.gd" id="8_6oi40"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="9_w5n5b"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="10_x85wy"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="11_7rp6r"]
+[ext_resource type="Resource" path="res://content/statuses/weak.tres" id="12_o3s2r"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/block_at_least_condition.gd" id="13_nabyl"]
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="14_l15j6"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="15_m8gjo"]
+[ext_resource type="Resource" path="res://content/statuses/thorns.tres" id="16_vhmqk"]
+
+[sub_resource type="Resource" id="Resource_8yhca"]
+script = ExtResource("2_0tett")
+target = ExtResource("3_522by")
+
+[sub_resource type="Resource" id="Resource_tysnk"]
+script = ExtResource("5_p0ehc")
+value = 5
+
+[sub_resource type="Resource" id="Resource_3ym3f"]
+script = ExtResource("4_dxhcw")
+status = ExtResource("6_1g177")
+stacks = SubResource("Resource_tysnk")
+target = ExtResource("3_522by")
+
+[sub_resource type="Resource" id="Resource_dw83d"]
+script = ExtResource("7_judps")
+phase_thresholds = PackedInt32Array(50)
+phase_change_effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_8yhca"), SubResource("Resource_3ym3f")])
+
+[sub_resource type="Resource" id="Resource_fxa44"]
+script = ExtResource("5_p0ehc")
+value = 2
+
+[sub_resource type="Resource" id="Resource_lsqss"]
+script = ExtResource("4_dxhcw")
+status = ExtResource("6_1g177")
+stacks = SubResource("Resource_fxa44")
+target = ExtResource("3_522by")
+
+[sub_resource type="Resource" id="Resource_0goh4"]
+script = ExtResource("8_6oi40")
+id = &"charge"
+name = "魔力集中"
+effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_lsqss")])
+weight = 20
+phases = 1
+
+[sub_resource type="Resource" id="Resource_322u6"]
+script = ExtResource("5_p0ehc")
+value = 16
+
+[sub_resource type="Resource" id="Resource_4uyan"]
+script = ExtResource("9_w5n5b")
+amount = SubResource("Resource_322u6")
+label = &"damage"
+target = ExtResource("10_x85wy")
+
+[sub_resource type="Resource" id="Resource_clu01"]
+script = ExtResource("8_6oi40")
+id = &"slam"
+name = "冥炎"
+effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_4uyan")])
+weight = 40
+max_in_a_row = 2
+phases = 1
+
+[sub_resource type="Resource" id="Resource_0u2pd"]
+script = ExtResource("5_p0ehc")
+value = 20
+
+[sub_resource type="Resource" id="Resource_1li6b"]
+script = ExtResource("11_7rp6r")
+amount = SubResource("Resource_0u2pd")
+
+[sub_resource type="Resource" id="Resource_sbah4"]
+script = ExtResource("8_6oi40")
+id = &"shield"
+name = "骨の障壁"
+effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_1li6b")])
+weight = 40
+phases = 1
+
+[sub_resource type="Resource" id="Resource_wyu5b"]
+script = ExtResource("5_p0ehc")
+value = 9
+
+[sub_resource type="Resource" id="Resource_srpcb"]
+script = ExtResource("5_p0ehc")
+value = 3
+
+[sub_resource type="Resource" id="Resource_xmp46"]
+script = ExtResource("9_w5n5b")
+amount = SubResource("Resource_wyu5b")
+hits = SubResource("Resource_srpcb")
+label = &"damage"
+target = ExtResource("10_x85wy")
+
+[sub_resource type="Resource" id="Resource_bcswv"]
+script = ExtResource("8_6oi40")
+id = &"fury"
+name = "死霊の乱舞"
+effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_xmp46")])
+weight = 60
+phases = 2
+
+[sub_resource type="Resource" id="Resource_8dqyt"]
+script = ExtResource("5_p0ehc")
+value = 32
+
+[sub_resource type="Resource" id="Resource_r22pb"]
+script = ExtResource("9_w5n5b")
+amount = SubResource("Resource_8dqyt")
+label = &"damage"
+target = ExtResource("10_x85wy")
+
+[sub_resource type="Resource" id="Resource_njhgt"]
+script = ExtResource("5_p0ehc")
+value = 2
+
+[sub_resource type="Resource" id="Resource_bq1jw"]
+script = ExtResource("4_dxhcw")
+status = ExtResource("12_o3s2r")
+stacks = SubResource("Resource_njhgt")
+target = ExtResource("10_x85wy")
+
+[sub_resource type="Resource" id="Resource_kwoea"]
+script = ExtResource("13_nabyl")
+on = 1
+value = 20
+
+[sub_resource type="Resource" id="Resource_3mo40"]
+script = ExtResource("8_6oi40")
+id = &"doom"
+name = "破滅"
+effects = Array[ExtResource("1_1yg8t")]([SubResource("Resource_r22pb"), SubResource("Resource_bq1jw")])
+weight = 40
+max_in_a_row = 1
+phases = 2
+priority = 1
+forced_when = SubResource("Resource_kwoea")
+
+[resource]
+script = ExtResource("14_l15j6")
+id = &"guardian"
+name = "死霊術師"
+rank = 2
+hp_min = 240
+hp_max = 240
+starting_statuses = Dictionary[ExtResource("15_m8gjo"), int]({
+ExtResource("16_vhmqk"): 3
+})
+moves = Array[ExtResource("8_6oi40")]([SubResource("Resource_0goh4"), SubResource("Resource_clu01"), SubResource("Resource_sbah4"), SubResource("Resource_bcswv"), SubResource("Resource_3mo40")])
+ai = SubResource("Resource_dw83d")

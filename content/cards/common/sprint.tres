@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_2a217"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/sprint.png" id="1_vka36"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_vka36"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="3_inkq3"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="4_syb8j"]
+
+[sub_resource type="Resource" id="Resource_2jp1v"]
+script = ExtResource("2_vka36")
+value = 1
+
+[sub_resource type="Resource" id="Resource_df6f3"]
+script = ExtResource("3_inkq3")
+count = SubResource("Resource_2jp1v")
+
+[sub_resource type="Resource" id="Resource_81fro"]
+script = ExtResource("2_vka36")
+value = 2
+
+[sub_resource type="Resource" id="Resource_34chu"]
+script = ExtResource("3_inkq3")
+count = SubResource("Resource_81fro")
+
+[resource]
+script = ExtResource("4_syb8j")
+id = &"sprint"
+name = "疾走"
+art = ExtResource("1_vka36")
+art_focus = 0.6
+type = 1
+on_play = Array[ExtResource("1_2a217")]([SubResource("Resource_34chu")])
+on_discard = Array[ExtResource("1_2a217")]([SubResource("Resource_df6f3")])
+text = "2 枚引く。捨てられた時：1 枚引く。"

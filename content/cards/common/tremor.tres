@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/tremor.png" id="1_uy1s2"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_w3epl"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_uy1s2"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_vv1ok"]
+[ext_resource type="Resource" path="res://content/presets/target_random_enemy.tres" id="4_t6xii"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="5_oay63"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_unk86"]
+
+[sub_resource type="Resource" id="Resource_jysxv"]
+script = ExtResource("2_uy1s2")
+value = 8
+
+[sub_resource type="Resource" id="Resource_3iy31"]
+script = ExtResource("3_vv1ok")
+amount = SubResource("Resource_jysxv")
+target = ExtResource("4_t6xii")
+
+[sub_resource type="Resource" id="Resource_m763x"]
+script = ExtResource("2_uy1s2")
+value = 5
+
+[sub_resource type="Resource" id="Resource_00pt4"]
+script = ExtResource("5_oay63")
+amount = SubResource("Resource_m763x")
+label = &"block"
+
+[resource]
+script = ExtResource("6_unk86")
+id = &"tremor"
+name = "戦慄"
+art = ExtResource("1_uy1s2")
+type = 1
+on_play = Array[ExtResource("1_w3epl")]([SubResource("Resource_00pt4")])
+on_discard = Array[ExtResource("1_w3epl")]([SubResource("Resource_3iy31")])
+text = "ブロックを {block} 得る。捨てられた時：ランダムな敵に 8 ダメージを与える。"

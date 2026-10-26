@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_mkd1d"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/retaliate.gd" id="2_i0rlh"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_ntg5a"]
+
+[sub_resource type="Resource" id="Resource_4f7da"]
+script = ExtResource("2_i0rlh")
+
+[resource]
+script = ExtResource("3_ntg5a")
+id = &"thorns"
+name = "トゲ"
+behaviors = Array[ExtResource("1_mkd1d")]([SubResource("Resource_4f7da")])
+text = "攻撃を受けたとき、攻撃者に {stacks} ダメージを与える。"

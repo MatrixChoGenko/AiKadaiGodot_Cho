@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_e02sh"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/cheat_death.gd" id="2_7cu2v"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_r1meg"]
+
+[sub_resource type="Resource" id="Resource_61gsw"]
+script = ExtResource("2_7cu2v")
+
+[resource]
+script = ExtResource("3_r1meg")
+id = &"revive"
+name = "起死回生"
+max_stacks = 9
+behaviors = Array[ExtResource("1_e02sh")]([SubResource("Resource_61gsw")])
+text = "致死ダメージを受けたとき、HP 1 で踏みとどまり HP を 10 回復する。1 回ごとに 1 減る（残り {stacks}）。"

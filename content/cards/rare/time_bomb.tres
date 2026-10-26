@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_5emxs"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/time_bomb.png" id="1_xlmoj"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_xlmoj"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_tra3c"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="4_7kdy7"]
+[ext_resource type="Script" path="res://src/content/effects/impl/defer_effect.gd" id="5_5js0g"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_dpivm"]
+
+[sub_resource type="Resource" id="Resource_7pss5"]
+script = ExtResource("2_xlmoj")
+value = 14
+
+[sub_resource type="Resource" id="Resource_5bxng"]
+script = ExtResource("3_tra3c")
+amount = SubResource("Resource_7pss5")
+label = &"damage"
+target = ExtResource("4_7kdy7")
+
+[sub_resource type="Resource" id="Resource_lt8ky"]
+script = ExtResource("5_5js0g")
+effects = Array[ExtResource("1_5emxs")]([SubResource("Resource_5bxng")])
+
+[resource]
+script = ExtResource("6_dpivm")
+id = &"time_bomb"
+name = "時限爆弾"
+art = ExtResource("1_xlmoj")
+art_focus = 0.4
+type = 1
+rarity = 3
+on_play = Array[ExtResource("1_5emxs")]([SubResource("Resource_lt8ky")])
+text = "このターンの終了時に、敵全体に {damage} ダメージを与える。"

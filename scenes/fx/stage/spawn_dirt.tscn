@@ -1,0 +1,123 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_puff.png" id="2_fx_puff"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_rock.png" id="3_fx_rock"]
+
+[sub_resource type="Curve" id="Curve_Dust"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.25, 1.0), 0.0, 0.0, 0, 0, Vector2(0.7, 0.9), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_Dust"]
+curve = SubResource("Curve_Dust")
+
+[sub_resource type="Gradient" id="Gradient_Dust"]
+offsets = PackedFloat32Array(0.0, 0.6, 1.0)
+colors = PackedColorArray(0.78, 0.68, 0.52, 1.0, 0.6, 0.5, 0.38, 0.9, 0.5, 0.42, 0.32, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Dust"]
+gradient = SubResource("Gradient_Dust")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Dust"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.6, 0.05, 0)
+direction = Vector3(1, 0.4, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.5
+gravity = Vector3(0, 0.6, 0)
+damping_min = 2.0
+damping_max = 3.0
+angle_min = -180.0
+angle_max = 180.0
+scale_min = 0.45
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_Dust")
+color_ramp = SubResource("GradientTexture_Dust")
+
+[sub_resource type="StandardMaterial3D" id="Material_Dust"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_puff")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Dust"]
+material = SubResource("Material_Dust")
+
+[sub_resource type="Curve" id="Curve_Rocks"]
+_data = [Vector2(0.0, 1.0), 0.0, 0.0, 0, 0, Vector2(0.8, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Rocks"]
+curve = SubResource("Curve_Rocks")
+
+[sub_resource type="Gradient" id="Gradient_Rocks"]
+offsets = PackedFloat32Array(0.0, 1.0)
+colors = PackedColorArray(0.62, 0.47, 0.33, 1.0, 0.5, 0.38, 0.27, 1.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Rocks"]
+gradient = SubResource("Gradient_Rocks")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Rocks"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.05, 0)
+direction = Vector3(0, 1, 0)
+spread = 45.0
+initial_velocity_min = 3.5
+initial_velocity_max = 6.5
+gravity = Vector3(0, -16, 0)
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_min = 0.14
+scale_max = 0.28
+scale_curve = SubResource("CurveTexture_Rocks")
+color_ramp = SubResource("GradientTexture_Rocks")
+
+[sub_resource type="StandardMaterial3D" id="Material_Rocks"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_fx_rock")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Rocks"]
+material = SubResource("Material_Rocks")
+
+[node name="SpawnDirt" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Dust" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 9
+lifetime = 0.9
+one_shot = true
+local_coords = true
+explosiveness = 0.85
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Dust")
+draw_pass_1 = SubResource("Quad_Dust")
+
+[node name="Rocks" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.8
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Rocks")
+draw_pass_1 = SubResource("Quad_Rocks")

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/strike.png" id="1_bksaa"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_v6xoc"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_bksaa"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_buomn"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_4bm78"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_85r0u"]
+
+[sub_resource type="Resource" id="Resource_8rfmh"]
+script = ExtResource("2_bksaa")
+value = 9
+
+[sub_resource type="Resource" id="Resource_y2ken"]
+script = ExtResource("3_buomn")
+amount = SubResource("Resource_8rfmh")
+label = &"damage"
+target = ExtResource("4_4bm78")
+
+[resource]
+script = ExtResource("5_85r0u")
+id = &"strike_plus"
+name = "ストライク+"
+art = ExtResource("1_bksaa")
+art_focus = 0.7
+rarity = 4
+aim = 1
+on_play = Array[ExtResource("1_v6xoc")]([SubResource("Resource_y2ken")])
+text = "{damage} ダメージを与える。"

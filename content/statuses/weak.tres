@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_65jst"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/damage_percent.gd" id="2_6dsud"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_gy6sj"]
+
+[sub_resource type="Resource" id="Resource_3fr16"]
+script = ExtResource("2_6dsud")
+percent = -25
+
+[resource]
+script = ExtResource("3_gy6sj")
+id = &"weak"
+name = "弱体"
+polarity = 1
+decay = 1
+behaviors = Array[ExtResource("1_65jst")]([SubResource("Resource_3fr16")])
+text = "与える攻撃ダメージが 25% 減る。残り {stacks} ラウンド。"

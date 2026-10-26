@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_mw66r"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/gather_strength.png" id="1_ohrct"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_ohrct"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_j2tuq"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="4_sign6"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_ttj36"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="6_f2oil"]
+[ext_resource type="Script" path="res://src/content/effects/impl/defer_effect.gd" id="7_n0ry1"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="8_2w4hx"]
+
+[sub_resource type="Resource" id="Resource_t884u"]
+script = ExtResource("3_j2tuq")
+value = 2
+
+[sub_resource type="Resource" id="Resource_uugk7"]
+script = ExtResource("2_ohrct")
+status = ExtResource("4_sign6")
+stacks = SubResource("Resource_t884u")
+target = ExtResource("5_ttj36")
+
+[sub_resource type="Resource" id="Resource_fw6dc"]
+script = ExtResource("3_j2tuq")
+value = 8
+
+[sub_resource type="Resource" id="Resource_hgprw"]
+script = ExtResource("6_f2oil")
+amount = SubResource("Resource_fw6dc")
+
+[sub_resource type="Resource" id="Resource_gigik"]
+script = ExtResource("7_n0ry1")
+timing = 1
+effects = Array[ExtResource("1_mw66r")]([SubResource("Resource_uugk7"), SubResource("Resource_hgprw")])
+
+[resource]
+script = ExtResource("8_2w4hx")
+id = &"gather_strength"
+name = "力を溜める"
+art = ExtResource("1_ohrct")
+art_focus = 0.3
+type = 1
+rarity = 2
+cost = 0
+keywords = 1
+on_play = Array[ExtResource("1_mw66r")]([SubResource("Resource_gigik")])
+text = "次のターン開始時に、筋力を 2 とブロックを 8 得る。"

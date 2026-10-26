@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_16dgk"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/combat_start_resources.gd" id="2_bw4aw"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_64yli"]
+
+[sub_resource type="Resource" id="Resource_bdkpa"]
+script = ExtResource("2_bw4aw")
+heal = 2
+
+[resource]
+script = ExtResource("3_64yli")
+id = &"blood_vial"
+name = "血の小瓶"
+behaviors = Array[ExtResource("1_16dgk")]([SubResource("Resource_bdkpa")])
+text = "各戦闘の開始時に HP を 2 回復する。"

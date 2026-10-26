@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_elr4h"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/meditation.png" id="1_nhpdw"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_nhpdw"]
+[ext_resource type="Script" path="res://src/content/values/impl/card_retained_turns_value.gd" id="3_sbciu"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_bkc45"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_4heqj"]
+
+[sub_resource type="Resource" id="Resource_4juis"]
+script = ExtResource("3_sbciu")
+
+[sub_resource type="Resource" id="Resource_vb6bw"]
+script = ExtResource("2_nhpdw")
+base = 1
+unit = SubResource("Resource_4juis")
+max_value = 4
+
+[sub_resource type="Resource" id="Resource_88c5f"]
+script = ExtResource("4_bkc45")
+count = SubResource("Resource_vb6bw")
+label = &"draw"
+
+[resource]
+script = ExtResource("5_4heqj")
+id = &"meditation"
+name = "瞑想"
+art = ExtResource("1_nhpdw")
+type = 1
+rarity = 2
+keywords = 2
+on_play = Array[ExtResource("1_elr4h")]([SubResource("Resource_88c5f")])
+text = "{draw} 枚引く（保留ターン 1 につき +1。最大 4）。"

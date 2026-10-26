@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_ilg7o"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/inflame.png" id="1_qruv3"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_qruv3"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_qhaqm"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="4_fxiov"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_8a1ad"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_qepje"]
+
+[sub_resource type="Resource" id="Resource_50rtn"]
+script = ExtResource("3_qhaqm")
+value = 2
+
+[sub_resource type="Resource" id="Resource_f051r"]
+script = ExtResource("2_qruv3")
+status = ExtResource("4_fxiov")
+stacks = SubResource("Resource_50rtn")
+label = &"strength"
+target = ExtResource("5_8a1ad")
+
+[resource]
+script = ExtResource("6_qepje")
+id = &"inflame"
+name = "発火"
+art = ExtResource("1_qruv3")
+art_focus = 0.3
+type = 2
+rarity = 2
+on_play = Array[ExtResource("1_ilg7o")]([SubResource("Resource_f051r")])
+text = "筋力を {strength} 得る。"

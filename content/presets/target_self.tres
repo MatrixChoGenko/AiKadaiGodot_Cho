@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="SelfTarget" format=3]
+
+[ext_resource type="Script" path="res://src/content/targeting/impl/self_target.gd" id="1_nh6o2"]
+
+[resource]
+script = ExtResource("1_nh6o2")

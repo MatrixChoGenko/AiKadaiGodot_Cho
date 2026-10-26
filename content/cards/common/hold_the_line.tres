@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/hold_the_line.png" id="1_86ju2"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_eqw35"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_86ju2"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_8ljr4"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="4_gupue"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_5ok5x"]
+
+[sub_resource type="Resource" id="Resource_wpas1"]
+script = ExtResource("2_86ju2")
+value = 6
+
+[sub_resource type="Resource" id="Resource_qy282"]
+script = ExtResource("3_8ljr4")
+amount = SubResource("Resource_wpas1")
+label = &"block"
+
+[sub_resource type="Resource" id="Resource_etsqp"]
+script = ExtResource("4_gupue")
+action = 2
+count = 3
+allow_fewer = true
+
+[resource]
+script = ExtResource("5_5ok5x")
+id = &"hold_the_line"
+name = "死守"
+art = ExtResource("1_86ju2")
+type = 1
+on_play = Array[ExtResource("1_eqw35")]([SubResource("Resource_qy282"), SubResource("Resource_etsqp")])
+text = "ブロックを {block} 得る。手札を最大 3 枚選び、このターンの終了時に保留する。"

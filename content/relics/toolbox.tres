@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_o7p81"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/victory_rewards.gd" id="2_7pkxg"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_uva1t"]
+
+[sub_resource type="Resource" id="Resource_a0lql"]
+script = ExtResource("2_7pkxg")
+gold = 12
+
+[resource]
+script = ExtResource("3_uva1t")
+id = &"toolbox"
+name = "道具箱"
+rarity = 5
+shop_price = 180
+behaviors = Array[ExtResource("1_o7p81")]([SubResource("Resource_a0lql")])
+text = "戦闘勝利後に追加で 12 ゴールドを得る。"

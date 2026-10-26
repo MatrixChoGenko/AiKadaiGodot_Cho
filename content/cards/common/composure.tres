@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/composure.png" id="1_r17nm"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_x31ov"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_r17nm"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_gxvf6"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="4_3p3ql"]
+[ext_resource type="Resource" path="res://content/cards/common/composure_plus.tres" id="5_et7yp"]
+
+[sub_resource type="Resource" id="Resource_ls2vn"]
+script = ExtResource("2_r17nm")
+value = 8
+
+[sub_resource type="Resource" id="Resource_pctwl"]
+script = ExtResource("3_gxvf6")
+amount = SubResource("Resource_ls2vn")
+label = &"block"
+
+[resource]
+script = ExtResource("4_3p3ql")
+id = &"composure"
+name = "平静"
+art = ExtResource("1_r17nm")
+type = 1
+keywords = 2
+upgraded = ExtResource("5_et7yp")
+on_play = Array[ExtResource("1_x31ov")]([SubResource("Resource_pctwl")])
+text = "ブロックを {block} 得る。"

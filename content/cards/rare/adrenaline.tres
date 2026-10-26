@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/adrenaline.png" id="1_obeqp"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_sbqmv"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_obeqp"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="3_p48a8"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="4_7egwt"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_55gb7"]
+
+[sub_resource type="Resource" id="Resource_eow61"]
+script = ExtResource("2_obeqp")
+value = 2
+
+[sub_resource type="Resource" id="Resource_mtich"]
+script = ExtResource("3_p48a8")
+count = SubResource("Resource_eow61")
+
+[sub_resource type="Resource" id="Resource_bf07a"]
+script = ExtResource("2_obeqp")
+value = 1
+
+[sub_resource type="Resource" id="Resource_l23t7"]
+script = ExtResource("4_7egwt")
+amount = SubResource("Resource_bf07a")
+
+[resource]
+script = ExtResource("5_55gb7")
+id = &"adrenaline"
+name = "アドレナリン"
+art = ExtResource("1_obeqp")
+art_focus = 0.4
+type = 1
+rarity = 3
+cost = 0
+keywords = 1
+on_play = Array[ExtResource("1_sbqmv")]([SubResource("Resource_mtich"), SubResource("Resource_l23t7")])
+text = "2 枚引き、エネルギーを 1 得る。"

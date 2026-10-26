@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EncounterData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="1_v2j5u"]
+[ext_resource type="Resource" path="res://content/enemies/jawworm.tres" id="2_kun4q"]
+[ext_resource type="Resource" path="res://content/enemies/slime.tres" id="3_j3yoc"]
+[ext_resource type="Script" path="res://src/content/data/encounter_data.gd" id="4_sc3j1"]
+
+[resource]
+script = ExtResource("4_sc3j1")
+id = &"mixed"
+name = "混成部隊"
+rank = 1
+enemies = Array[ExtResource("1_v2j5u")]([ExtResource("2_kun4q"), ExtResource("3_j3yoc")])

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_3vhp4"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/zealous_strike.png" id="1_c7eq4"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_c7eq4"]
+[ext_resource type="Script" path="res://src/content/values/impl/status_stacks_value.gd" id="3_gh0sg"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="4_lkxo8"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_fwtqe"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_54r5c"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_rmi65"]
+
+[sub_resource type="Resource" id="Resource_p3giq"]
+script = ExtResource("3_gh0sg")
+status = ExtResource("4_lkxo8")
+
+[sub_resource type="Resource" id="Resource_gfj7d"]
+script = ExtResource("2_c7eq4")
+base = 6
+per = 3
+unit = SubResource("Resource_p3giq")
+
+[sub_resource type="Resource" id="Resource_2sh4c"]
+script = ExtResource("5_fwtqe")
+amount = SubResource("Resource_gfj7d")
+label = &"damage"
+target = ExtResource("6_54r5c")
+
+[resource]
+script = ExtResource("7_rmi65")
+id = &"zealous_strike_plus"
+name = "狂信の一撃+"
+art = ExtResource("1_c7eq4")
+rarity = 4
+aim = 1
+on_play = Array[ExtResource("1_3vhp4")]([SubResource("Resource_2sh4c")])
+text = "{damage} ダメージを与える（自分の筋力 1 につき +3）。"

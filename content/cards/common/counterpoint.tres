@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/counterpoint.png" id="1_0iefn"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_igpnq"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_0iefn"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_7clmg"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/last_card_type_condition.gd" id="4_p0r0u"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_sgaod"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="6_kgvjy"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_3tm4n"]
+
+[sub_resource type="Resource" id="Resource_rs87h"]
+script = ExtResource("2_0iefn")
+value = 10
+
+[sub_resource type="Resource" id="Resource_g64vt"]
+script = ExtResource("2_0iefn")
+value = 5
+
+[sub_resource type="Resource" id="Resource_wl12n"]
+script = ExtResource("4_p0r0u")
+
+[sub_resource type="Resource" id="Resource_hmh0y"]
+script = ExtResource("3_7clmg")
+when = SubResource("Resource_wl12n")
+then = SubResource("Resource_g64vt")
+otherwise = SubResource("Resource_rs87h")
+
+[sub_resource type="Resource" id="Resource_yhhbc"]
+script = ExtResource("5_sgaod")
+amount = SubResource("Resource_hmh0y")
+label = &"damage"
+target = ExtResource("6_kgvjy")
+
+[resource]
+script = ExtResource("7_3tm4n")
+id = &"counterpoint"
+name = "対位法"
+art = ExtResource("1_0iefn")
+on_play = Array[ExtResource("1_igpnq")]([SubResource("Resource_yhhbc")])
+text = "敵全体に {damage} ダメージを与える（直前のカードがアタックでなければ 10）。"

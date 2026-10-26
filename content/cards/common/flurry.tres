@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_sxa4k"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/flurry.png" id="1_u6fgl"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_u6fgl"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_o2unl"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_44gyf"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_havwx"]
+[ext_resource type="Resource" path="res://content/cards/common/flurry_plus.tres" id="6_krprv"]
+
+[sub_resource type="Resource" id="Resource_qjste"]
+script = ExtResource("2_u6fgl")
+value = 4
+
+[sub_resource type="Resource" id="Resource_qhs58"]
+script = ExtResource("2_u6fgl")
+value = 3
+
+[sub_resource type="Resource" id="Resource_sha1v"]
+script = ExtResource("3_o2unl")
+amount = SubResource("Resource_qjste")
+hits = SubResource("Resource_qhs58")
+label = &"damage"
+target = ExtResource("4_44gyf")
+
+[resource]
+script = ExtResource("5_havwx")
+id = &"flurry"
+name = "疾風連撃"
+art = ExtResource("1_u6fgl")
+aim = 1
+upgraded = ExtResource("6_krprv")
+on_play = Array[ExtResource("1_sxa4k")]([SubResource("Resource_sha1v")])
+text = "{damage} ダメージを 3 回与える。"

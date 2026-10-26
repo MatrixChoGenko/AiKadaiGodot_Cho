@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_jsv1n"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/infection.png" id="1_va11g"]
+[ext_resource type="Script" path="res://src/content/effects/impl/spread_status_effect.gd" id="2_va11g"]
+[ext_resource type="Resource" path="res://content/presets/target_other_enemies.tres" id="3_48bqf"]
+[ext_resource type="Resource" path="res://content/statuses/poison.tres" id="4_ektsp"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_k4na6"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_8oitc"]
+
+[sub_resource type="Resource" id="Resource_3cnml"]
+script = ExtResource("2_va11g")
+status = ExtResource("4_ektsp")
+spread_to = ExtResource("3_48bqf")
+target = ExtResource("5_k4na6")
+
+[resource]
+script = ExtResource("6_8oitc")
+id = &"infection"
+name = "感染"
+art = ExtResource("1_va11g")
+type = 1
+rarity = 2
+aim = 1
+on_play = Array[ExtResource("1_jsv1n")]([SubResource("Resource_3cnml")])
+text = "対象の毒の半分を、他のすべての敵に付与する。"

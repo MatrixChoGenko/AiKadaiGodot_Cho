@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_x6vdl"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/damage_over_time.gd" id="2_vsv6e"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_tuaut"]
+
+[sub_resource type="Resource" id="Resource_mfioh"]
+script = ExtResource("2_vsv6e")
+
+[resource]
+script = ExtResource("3_tuaut")
+id = &"poison"
+name = "毒"
+polarity = 1
+behaviors = Array[ExtResource("1_x6vdl")]([SubResource("Resource_mfioh")])
+text = "プレイヤーのターン終了時に、ブロックを無視して {stacks} ダメージを受け、毒が 1 減る。"

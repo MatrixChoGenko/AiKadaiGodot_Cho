@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EncounterData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="1_itned"]
+[ext_resource type="Resource" path="res://content/enemies/guardian.tres" id="2_00byv"]
+[ext_resource type="Script" path="res://src/content/data/encounter_data.gd" id="3_p4nl2"]
+
+[resource]
+script = ExtResource("3_p4nl2")
+id = &"guardian"
+name = "死霊術師"
+rank = 2
+enemies = Array[ExtResource("1_itned")]([ExtResource("2_00byv")])

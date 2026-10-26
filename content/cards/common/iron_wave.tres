@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_6ivrj"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/iron_wave.png" id="1_x1t64"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_x1t64"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_8cxgl"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_2muun"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_ukhyy"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_i5v1o"]
+[ext_resource type="Resource" path="res://content/cards/common/iron_wave_plus.tres" id="7_5yico"]
+
+[sub_resource type="Resource" id="Resource_5ghqv"]
+script = ExtResource("2_x1t64")
+value = 5
+
+[sub_resource type="Resource" id="Resource_qw3ic"]
+script = ExtResource("3_8cxgl")
+amount = SubResource("Resource_5ghqv")
+label = &"block"
+
+[sub_resource type="Resource" id="Resource_4mwgo"]
+script = ExtResource("2_x1t64")
+value = 5
+
+[sub_resource type="Resource" id="Resource_6vyjk"]
+script = ExtResource("4_2muun")
+amount = SubResource("Resource_4mwgo")
+label = &"damage"
+target = ExtResource("5_ukhyy")
+
+[resource]
+script = ExtResource("6_i5v1o")
+id = &"iron_wave"
+name = "アイアンウェーブ"
+art = ExtResource("1_x1t64")
+art_focus = 0.8
+aim = 1
+upgraded = ExtResource("7_5yico")
+on_play = Array[ExtResource("1_6ivrj")]([SubResource("Resource_qw3ic"), SubResource("Resource_6vyjk")])
+text = "ブロックを {block} 得て、{damage} ダメージを与える。"

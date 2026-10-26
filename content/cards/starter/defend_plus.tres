@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_5h4j4"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/defend.png" id="1_ddg61"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_ddg61"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_xtyt7"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="4_kcvk7"]
+
+[sub_resource type="Resource" id="Resource_2we1t"]
+script = ExtResource("2_ddg61")
+value = 8
+
+[sub_resource type="Resource" id="Resource_uwyib"]
+script = ExtResource("3_xtyt7")
+amount = SubResource("Resource_2we1t")
+label = &"block"
+
+[resource]
+script = ExtResource("4_kcvk7")
+id = &"defend_plus"
+name = "防御+"
+art = ExtResource("1_ddg61")
+art_focus = 0.6
+type = 1
+rarity = 4
+on_play = Array[ExtResource("1_5h4j4")]([SubResource("Resource_uwyib")])
+text = "ブロックを {block} 得る。"

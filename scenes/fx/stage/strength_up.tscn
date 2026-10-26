@@ -1,0 +1,168 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_flame.png" id="2_fx_flame"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_sparkle.png" id="3_fx_sparkle"]
+
+[sub_resource type="Curve" id="Curve_Aura"]
+_data = [Vector2(0.0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.25, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 1.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Aura"]
+curve = SubResource("Curve_Aura")
+
+[sub_resource type="Gradient" id="Gradient_Aura"]
+offsets = PackedFloat32Array(0.0, 0.2, 1.0)
+colors = PackedColorArray(1.0, 0.7, 0.3, 0.0, 1.0, 0.45, 0.12, 0.45, 1.0, 0.25, 0.05, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Aura"]
+gradient = SubResource("Gradient_Aura")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Aura"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.6
+scale_max = 2.6
+scale_curve = SubResource("CurveTexture_Aura")
+color_ramp = SubResource("GradientTexture_Aura")
+
+[sub_resource type="StandardMaterial3D" id="Material_Aura"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_flame")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Aura"]
+material = SubResource("Material_Aura")
+
+[sub_resource type="Curve" id="Curve_Flames"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Flames"]
+curve = SubResource("Curve_Flames")
+
+[sub_resource type="Gradient" id="Gradient_Flames"]
+offsets = PackedFloat32Array(0.0, 0.3, 0.7, 1.0)
+colors = PackedColorArray(1.0, 0.95, 0.6, 1.0, 1.0, 0.55, 0.15, 1.0, 0.95, 0.2, 0.1, 1.0, 0.6, 0.05, 0.05, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Flames"]
+gradient = SubResource("Gradient_Flames")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Flames"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.55, 0.05, 0)
+direction = Vector3(0, 1, 0)
+spread = 8.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 2.0
+scale_min = 0.65
+scale_max = 1.0
+scale_curve = SubResource("CurveTexture_Flames")
+color_ramp = SubResource("GradientTexture_Flames")
+
+[sub_resource type="StandardMaterial3D" id="Material_Flames"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_flame")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Flames"]
+material = SubResource("Material_Flames")
+
+[sub_resource type="Curve" id="Curve_Embers"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Embers"]
+curve = SubResource("Curve_Embers")
+
+[sub_resource type="Gradient" id="Gradient_Embers"]
+offsets = PackedFloat32Array(0.0, 0.5, 1.0)
+colors = PackedColorArray(1.0, 1.0, 0.7, 1.0, 1.0, 0.6, 0.2, 1.0, 1.0, 0.3, 0.1, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Embers"]
+gradient = SubResource("Gradient_Embers")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Embers"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.6, 0.3, 0)
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.5
+gravity = Vector3(0, 0, 0)
+damping_min = 2.0
+damping_max = 3.0
+scale_min = 0.12
+scale_max = 0.22
+scale_curve = SubResource("CurveTexture_Embers")
+color_ramp = SubResource("GradientTexture_Embers")
+
+[sub_resource type="StandardMaterial3D" id="Material_Embers"]
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_fx_sparkle")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Embers"]
+material = SubResource("Material_Embers")
+
+[node name="StrengthUp" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Aura" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+emitting = false
+amount = 1
+lifetime = 0.55
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Aura")
+draw_pass_1 = SubResource("Quad_Aura")
+
+[node name="Flames" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.55
+one_shot = true
+local_coords = true
+explosiveness = 0.55
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Flames")
+draw_pass_1 = SubResource("Quad_Flames")
+
+[node name="Embers" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 8
+lifetime = 0.8
+one_shot = true
+local_coords = true
+explosiveness = 0.5
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Embers")
+draw_pass_1 = SubResource("Quad_Embers")

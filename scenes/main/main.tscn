@@ -1,0 +1,84 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/main/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/screens/main_menu.tscn" id="2_menu"]
+[ext_resource type="PackedScene" path="res://scenes/screens/compendium.tscn" id="14_compendium"]
+[ext_resource type="PackedScene" path="res://scenes/screens/map.tscn" id="3_map"]
+[ext_resource type="PackedScene" path="res://scenes/screens/combat.tscn" id="7_combat"]
+[ext_resource type="PackedScene" path="res://scenes/screens/reward.tscn" id="8_reward"]
+[ext_resource type="PackedScene" path="res://scenes/screens/shop.tscn" id="9_shop"]
+[ext_resource type="PackedScene" path="res://scenes/screens/event.tscn" id="10_event"]
+[ext_resource type="PackedScene" path="res://scenes/screens/rest.tscn" id="11_rest"]
+[ext_resource type="PackedScene" path="res://scenes/screens/act_transition.tscn" id="12_act"]
+[ext_resource type="PackedScene" path="res://scenes/screens/run_end.tscn" id="13_end"]
+[ext_resource type="Script" path="res://src/presentation/main/screen_host.gd" id="4_screen_host"]
+[ext_resource type="Script" path="res://src/presentation/main/modal_host.gd" id="5_modal_host"]
+[ext_resource type="PackedScene" path="res://scenes/widgets/top_bar.tscn" id="6_top_bar"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_main")
+screens = Dictionary[int, PackedScene]({
+0: ExtResource("3_map"),
+1: ExtResource("7_combat"),
+2: ExtResource("8_reward"),
+3: ExtResource("9_shop"),
+4: ExtResource("10_event"),
+5: ExtResource("11_rest"),
+6: ExtResource("8_reward"),
+7: ExtResource("12_act"),
+8: ExtResource("13_end"),
+9: ExtResource("13_end")
+})
+main_menu_scene = ExtResource("2_menu")
+compendium_scene = ExtResource("14_compendium")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BackdropColor" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.07, 0.07, 0.1, 1)
+
+[node name="Screens" type="CanvasLayer" parent="."]
+
+[node name="ScreenHost" type="Control" parent="Screens"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_screen_host")
+
+[node name="TopBar" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TopBarView" parent="TopBar" instance=ExtResource("6_top_bar")]
+unique_name_in_owner = true
+
+[node name="Modals" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="ModalHost" type="Control" parent="Modals"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_modal_host")
+
+[node name="ScreenFx" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Tooltip" type="CanvasLayer" parent="."]
+layer = 100

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_2wntr"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/recast.png" id="1_texg0"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_texg0"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="3_f01e3"]
+
+[sub_resource type="Resource" id="Resource_o2guo"]
+script = ExtResource("2_texg0")
+source = 3
+action = 6
+
+[resource]
+script = ExtResource("3_f01e3")
+id = &"recast"
+name = "鋳直し"
+art = ExtResource("1_texg0")
+type = 1
+rarity = 2
+on_play = Array[ExtResource("1_2wntr")]([SubResource("Resource_o2guo")])
+text = "廃棄札から 1 枚選んで手札に加える。"

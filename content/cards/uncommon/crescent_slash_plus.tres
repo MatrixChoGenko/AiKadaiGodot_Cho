@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_cij1u"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/crescent_slash.png" id="1_v6ug6"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_v6ug6"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_fwkum"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_0ry8o"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="5_2ynom"]
+[ext_resource type="Resource" path="res://content/statuses/vulnerable.tres" id="6_04i1c"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_ltk5t"]
+
+[sub_resource type="Resource" id="Resource_1uolt"]
+script = ExtResource("2_v6ug6")
+value = 11
+
+[sub_resource type="Resource" id="Resource_kgx5i"]
+script = ExtResource("3_fwkum")
+amount = SubResource("Resource_1uolt")
+label = &"damage"
+target = ExtResource("4_0ry8o")
+
+[sub_resource type="Resource" id="Resource_nko50"]
+script = ExtResource("2_v6ug6")
+value = 2
+
+[sub_resource type="Resource" id="Resource_2wwv7"]
+script = ExtResource("5_2ynom")
+status = ExtResource("6_04i1c")
+stacks = SubResource("Resource_nko50")
+label = &"vulnerable"
+target = ExtResource("4_0ry8o")
+
+[resource]
+script = ExtResource("7_ltk5t")
+id = &"crescent_slash_plus"
+name = "三日月斬り+"
+art = ExtResource("1_v6ug6")
+rarity = 4
+aim = 1
+on_play = Array[ExtResource("1_cij1u")]([SubResource("Resource_kgx5i"), SubResource("Resource_2wwv7")])
+text = "{damage} ダメージを与え、脆弱を {vulnerable} 付与する。"

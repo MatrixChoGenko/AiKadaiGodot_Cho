@@ -1,0 +1,89 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/screens/map_screen.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/presentation/map/map_view.gd" id="2_map"]
+
+[node name="MapScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="PaperFallback" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.769, 0.686, 0.616, 1)
+
+[node name="Paper" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Center" type="CenterContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MapView" type="Control" parent="Scroll/Center"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_map")
+
+[node name="Side" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 140.0
+offset_right = 360.0
+offset_bottom = 600.0
+mouse_filter = 2
+theme_type_variation = &"PanelHud"
+
+[node name="Column" type="VBoxContainer" parent="Side"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="ActTitle" type="Label" parent="Side/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "第 1 アクト"
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Side/Column"]
+modulate = Color(1, 1, 1, 0.7)
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+text = "光っているノードを選んで進む"
+autowrap_mode = 3
+
+[node name="Legend" type="VBoxContainer" parent="Side/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2

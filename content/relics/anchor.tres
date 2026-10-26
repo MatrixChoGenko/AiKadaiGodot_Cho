@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_yxpkv"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/combat_start_resources.gd" id="2_y5vwc"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_bymwm"]
+
+[sub_resource type="Resource" id="Resource_pslrb"]
+script = ExtResource("2_y5vwc")
+block = 10
+
+[resource]
+script = ExtResource("3_bymwm")
+id = &"anchor"
+name = "錨"
+behaviors = Array[ExtResource("1_yxpkv")]([SubResource("Resource_pslrb")])
+text = "各戦闘の第 1 ターンにブロックを 10 得る。"

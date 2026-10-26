@@ -1,0 +1,167 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/widgets/card_list_modal.gd" id="1_script"]
+
+[node name="CardListModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Dim" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelDim"
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 50
+
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+theme_type_variation = &"PanelCard"
+
+[node name="Column" type="VBoxContainer" parent="Margin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Margin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelLarge"
+text = "カードを選ぶ"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="Margin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+horizontal_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Center" type="CenterContainer" parent="Margin/Panel/Column/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Grid" type="GridContainer" parent="Margin/Panel/Column/Scroll/Center"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 5
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/Column"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="Margin/Panel/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "決定"
+
+[node name="CancelButton" type="Button" parent="Margin/Panel/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+text = "閉じる"
+
+[node name="Compare" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="Panel" parent="Compare"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelDim"
+
+[node name="Center" type="CenterContainer" parent="Compare"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Column" type="VBoxContainer" parent="Compare/Center"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="CompareTitle" type="Label" parent="Compare/Center/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelLarge"
+text = "アップグレード"
+horizontal_alignment = 1
+
+[node name="Cards" type="HBoxContainer" parent="Compare/Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 56
+alignment = 1
+
+[node name="BeforeSlot" type="Control" parent="Compare/Center/Column/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(390, 546)
+layout_mode = 2
+
+[node name="Arrow" type="Label" parent="Compare/Center/Column/Cards"]
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
+text = "→"
+vertical_alignment = 1
+
+[node name="AfterSlot" type="Control" parent="Compare/Center/Column/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(390, 546)
+layout_mode = 2
+
+[node name="CompareButtons" type="HBoxContainer" parent="Compare/Center/Column"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BackButton" type="Button" parent="Compare/Center/Column/CompareButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+text = "戻る"
+
+[node name="CompareConfirmButton" type="Button" parent="Compare/Center/Column/CompareButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "決定"

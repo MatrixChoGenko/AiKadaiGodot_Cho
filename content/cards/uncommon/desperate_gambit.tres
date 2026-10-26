@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/desperate_gambit.png" id="1_56i5y"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_ecikh"]
+[ext_resource type="Resource" path="res://content/cards/status/wound.tres" id="2_56i5y"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_2i74b"]
+[ext_resource type="Script" path="res://src/content/effects/impl/create_card_effect.gd" id="4_4b5rr"]
+[ext_resource type="Script" path="res://src/content/effects/impl/branch_effect.gd" id="5_dhv1x"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="6_ht53g"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="7_dxeby"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/hp_below_percent_condition.gd" id="8_36tyn"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="9_8vthu"]
+
+[sub_resource type="Resource" id="Resource_lm4lh"]
+script = ExtResource("3_2i74b")
+value = 1
+
+[sub_resource type="Resource" id="Resource_56tlx"]
+script = ExtResource("4_4b5rr")
+card = ExtResource("2_56i5y")
+count = SubResource("Resource_lm4lh")
+temporary = true
+
+[sub_resource type="Resource" id="Resource_tx5bh"]
+script = ExtResource("3_2i74b")
+value = 2
+
+[sub_resource type="Resource" id="Resource_64gm1"]
+script = ExtResource("6_ht53g")
+count = SubResource("Resource_tx5bh")
+
+[sub_resource type="Resource" id="Resource_i1fl2"]
+script = ExtResource("3_2i74b")
+value = 1
+
+[sub_resource type="Resource" id="Resource_h5nje"]
+script = ExtResource("7_dxeby")
+amount = SubResource("Resource_i1fl2")
+
+[sub_resource type="Resource" id="Resource_i4xya"]
+script = ExtResource("8_36tyn")
+
+[sub_resource type="Resource" id="Resource_f22u7"]
+script = ExtResource("5_dhv1x")
+when = SubResource("Resource_i4xya")
+then = Array[ExtResource("1_ecikh")]([SubResource("Resource_64gm1"), SubResource("Resource_h5nje")])
+otherwise = Array[ExtResource("1_ecikh")]([SubResource("Resource_56tlx")])
+
+[resource]
+script = ExtResource("9_8vthu")
+id = &"desperate_gambit"
+name = "決死の賭け"
+art = ExtResource("1_56i5y")
+type = 1
+rarity = 2
+on_play = Array[ExtResource("1_ecikh")]([SubResource("Resource_f22u7")])
+text = "HP が 50% 未満なら 2 枚引き、エネルギーを 1 得る。そうでなければ「傷」を 1 枚捨て札に入れる。"

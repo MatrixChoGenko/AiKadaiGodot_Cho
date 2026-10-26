@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_b8oyk"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/crescendo.png" id="1_m3cuv"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_m3cuv"]
+[ext_resource type="Script" path="res://src/content/values/impl/played_this_turn_value.gd" id="3_lc5xe"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_loxja"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="5_fjy5u"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_kfnnr"]
+
+[sub_resource type="Resource" id="Resource_fqx3d"]
+script = ExtResource("3_lc5xe")
+
+[sub_resource type="Resource" id="Resource_62bp0"]
+script = ExtResource("2_m3cuv")
+per = 4
+unit = SubResource("Resource_fqx3d")
+
+[sub_resource type="Resource" id="Resource_m6g0p"]
+script = ExtResource("4_loxja")
+amount = SubResource("Resource_62bp0")
+label = &"damage"
+target = ExtResource("5_fjy5u")
+
+[resource]
+script = ExtResource("6_kfnnr")
+id = &"crescendo"
+name = "クレッシェンド"
+art = ExtResource("1_m3cuv")
+art_focus = 0.4
+rarity = 2
+cost = 2
+on_play = Array[ExtResource("1_b8oyk")]([SubResource("Resource_m6g0p")])
+text = "敵全体に {damage} ダメージを与える（このターンにプレイしたカード 1 枚につき 4。これを含む）。"

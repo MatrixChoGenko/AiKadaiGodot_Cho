@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_4mha0"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/poison_stab.png" id="1_j4ohm"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_j4ohm"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_y05uo"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_xj5jq"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="5_sjt7q"]
+[ext_resource type="Resource" path="res://content/statuses/poison.tres" id="6_jhrui"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_bc63v"]
+
+[sub_resource type="Resource" id="Resource_5xp4d"]
+script = ExtResource("2_j4ohm")
+value = 5
+
+[sub_resource type="Resource" id="Resource_fbxop"]
+script = ExtResource("3_y05uo")
+amount = SubResource("Resource_5xp4d")
+label = &"damage"
+target = ExtResource("4_xj5jq")
+
+[sub_resource type="Resource" id="Resource_dqkil"]
+script = ExtResource("2_j4ohm")
+value = 3
+
+[sub_resource type="Resource" id="Resource_wpub3"]
+script = ExtResource("5_sjt7q")
+status = ExtResource("6_jhrui")
+stacks = SubResource("Resource_dqkil")
+label = &"poison"
+target = ExtResource("4_xj5jq")
+
+[resource]
+script = ExtResource("7_bc63v")
+id = &"poison_stab"
+name = "毒突き"
+art = ExtResource("1_j4ohm")
+art_focus = 0.7
+aim = 1
+on_play = Array[ExtResource("1_4mha0")]([SubResource("Resource_fbxop"), SubResource("Resource_wpub3")])
+text = "{damage} ダメージを与え、毒を {poison} 付与する。"

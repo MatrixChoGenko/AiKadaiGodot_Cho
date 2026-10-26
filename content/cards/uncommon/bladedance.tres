@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/bladedance.png" id="1_lclnu"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_qb1qt"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_lclnu"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_51mgb"]
+[ext_resource type="Resource" path="res://content/presets/target_random_enemy.tres" id="4_n5mdf"]
+[ext_resource type="Script" path="res://src/content/effects/impl/repeat_effect.gd" id="5_32rb8"]
+[ext_resource type="Script" path="res://src/content/values/impl/hand_count_value.gd" id="6_k2kgg"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_hu1yo"]
+
+[sub_resource type="Resource" id="Resource_guewu"]
+script = ExtResource("2_lclnu")
+value = 4
+
+[sub_resource type="Resource" id="Resource_gqn4a"]
+script = ExtResource("3_51mgb")
+amount = SubResource("Resource_guewu")
+label = &"damage"
+target = ExtResource("4_n5mdf")
+
+[sub_resource type="Resource" id="Resource_puvow"]
+script = ExtResource("6_k2kgg")
+min_value = 1
+
+[sub_resource type="Resource" id="Resource_0sjbq"]
+script = ExtResource("5_32rb8")
+times = SubResource("Resource_puvow")
+effects = Array[ExtResource("1_qb1qt")]([SubResource("Resource_gqn4a")])
+
+[resource]
+script = ExtResource("7_hu1yo")
+id = &"bladedance"
+name = "剣の舞"
+art = ExtResource("1_lclnu")
+rarity = 2
+on_play = Array[ExtResource("1_qb1qt")]([SubResource("Resource_0sjbq")])
+text = "ランダムな敵に {damage} ダメージを与える。これを手札の枚数回（最低 1 回）繰り返す。"

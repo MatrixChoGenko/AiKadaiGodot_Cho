@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_y1o3j"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/negate_debuff.gd" id="2_yjjx5"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_lgdbi"]
+
+[sub_resource type="Resource" id="Resource_eqjyy"]
+script = ExtResource("2_yjjx5")
+
+[resource]
+script = ExtResource("3_lgdbi")
+id = &"artifact"
+name = "アーティファクト"
+max_stacks = 99
+behaviors = Array[ExtResource("1_y1o3j")]([SubResource("Resource_eqjyy")])
+text = "次に付与されるデバフを {stacks} 回打ち消す。"

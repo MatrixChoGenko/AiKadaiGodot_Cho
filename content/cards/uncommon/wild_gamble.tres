@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/wild_gamble.png" id="1_eodd2"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_lw68e"]
+[ext_resource type="Script" path="res://src/content/effects/weighted_effects.gd" id="2_eodd2"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_id8t0"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="4_fxiug"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="5_ci42y"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="6_g31tl"]
+[ext_resource type="Script" path="res://src/content/effects/impl/random_choice_effect.gd" id="7_twnjb"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="8_st14j"]
+
+[sub_resource type="Resource" id="Resource_iwsuu"]
+script = ExtResource("3_id8t0")
+value = 8
+
+[sub_resource type="Resource" id="Resource_urvhq"]
+script = ExtResource("4_fxiug")
+amount = SubResource("Resource_iwsuu")
+
+[sub_resource type="Resource" id="Resource_dpqu6"]
+script = ExtResource("2_eodd2")
+weight = 40
+effects = Array[ExtResource("1_lw68e")]([SubResource("Resource_urvhq")])
+
+[sub_resource type="Resource" id="Resource_e84kk"]
+script = ExtResource("3_id8t0")
+value = 2
+
+[sub_resource type="Resource" id="Resource_ca7ij"]
+script = ExtResource("5_ci42y")
+count = SubResource("Resource_e84kk")
+
+[sub_resource type="Resource" id="Resource_svhf0"]
+script = ExtResource("2_eodd2")
+weight = 40
+effects = Array[ExtResource("1_lw68e")]([SubResource("Resource_ca7ij")])
+
+[sub_resource type="Resource" id="Resource_a24b7"]
+script = ExtResource("3_id8t0")
+value = 2
+
+[sub_resource type="Resource" id="Resource_h8qaa"]
+script = ExtResource("6_g31tl")
+amount = SubResource("Resource_a24b7")
+
+[sub_resource type="Resource" id="Resource_lcyhf"]
+script = ExtResource("2_eodd2")
+weight = 20
+effects = Array[ExtResource("1_lw68e")]([SubResource("Resource_h8qaa")])
+
+[sub_resource type="Resource" id="Resource_535ym"]
+script = ExtResource("7_twnjb")
+options = Array[ExtResource("2_eodd2")]([SubResource("Resource_dpqu6"), SubResource("Resource_svhf0"), SubResource("Resource_lcyhf")])
+
+[resource]
+script = ExtResource("8_st14j")
+id = &"wild_gamble"
+name = "一か八か"
+art = ExtResource("1_eodd2")
+type = 1
+rarity = 2
+on_play = Array[ExtResource("1_lw68e")]([SubResource("Resource_535ym")])
+text = "ランダムに 1 つ：ブロックを 8 得る / 2 枚引く / エネルギーを 2 得る。"

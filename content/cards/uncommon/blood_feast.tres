@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/blood_feast.png" id="1_h5f7t"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_q0qme"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_h5f7t"]
+[ext_resource type="Script" path="res://src/content/effects/impl/lose_hp_effect.gd" id="3_y4jx0"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_f1nsg"]
+[ext_resource type="Script" path="res://src/content/effects/impl/modify_cost_effect.gd" id="5_w7tib"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_877ay"]
+
+[sub_resource type="Resource" id="Resource_4b4eq"]
+script = ExtResource("2_h5f7t")
+value = 10
+
+[sub_resource type="Resource" id="Resource_4ddml"]
+script = ExtResource("3_y4jx0")
+amount = SubResource("Resource_4b4eq")
+
+[sub_resource type="Resource" id="Resource_jglea"]
+script = ExtResource("2_h5f7t")
+value = 3
+
+[sub_resource type="Resource" id="Resource_exikr"]
+script = ExtResource("4_f1nsg")
+count = SubResource("Resource_jglea")
+
+[sub_resource type="Resource" id="Resource_vc63r"]
+script = ExtResource("5_w7tib")
+
+[resource]
+script = ExtResource("6_877ay")
+id = &"blood_feast"
+name = "血の宴"
+art = ExtResource("1_h5f7t")
+type = 1
+rarity = 2
+cost = 2
+on_play = Array[ExtResource("1_q0qme")]([SubResource("Resource_4ddml"), SubResource("Resource_exikr"), SubResource("Resource_vc63r")])
+text = "HP を 10 失い、3 枚引き、このターン手札のコストを 1 下げる。"

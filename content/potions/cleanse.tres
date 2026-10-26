@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="PotionData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_6uthu"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_ideod"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_v1ryw"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_g3tn8"]
+[ext_resource type="Script" path="res://src/content/data/potion_data.gd" id="5_sr38p"]
+
+[sub_resource type="Resource" id="Resource_4kvwl"]
+script = ExtResource("2_ideod")
+action = 1
+count = 2
+allow_fewer = true
+
+[sub_resource type="Resource" id="Resource_6lu21"]
+script = ExtResource("3_v1ryw")
+value = 3
+
+[sub_resource type="Resource" id="Resource_n2s14"]
+script = ExtResource("4_g3tn8")
+count = SubResource("Resource_6lu21")
+
+[resource]
+script = ExtResource("5_sr38p")
+id = &"cleanse"
+name = "澄明ポーション"
+rarity = 2
+effects = Array[ExtResource("1_6uthu")]([SubResource("Resource_4kvwl"), SubResource("Resource_n2s14")])
+text = "手札を最大 2 枚選んで廃棄し、その後 3 枚引く。"

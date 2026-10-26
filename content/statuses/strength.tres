@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_ooy55"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/flat_damage_bonus.gd" id="2_1dh2t"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_426mu"]
+
+[sub_resource type="Resource" id="Resource_slqav"]
+script = ExtResource("2_1dh2t")
+
+[resource]
+script = ExtResource("3_426mu")
+id = &"strength"
+name = "筋力"
+behaviors = Array[ExtResource("1_ooy55")]([SubResource("Resource_slqav")])
+text = "攻撃ダメージが {stacks} 増える。"

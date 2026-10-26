@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/demon_form.png" id="1_mvplj"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_sb5ee"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_mvplj"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_ybpuf"]
+[ext_resource type="Resource" path="res://content/statuses/demon_form.tres" id="4_yu72e"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_f2rdn"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_0p878"]
+
+[sub_resource type="Resource" id="Resource_omjnx"]
+script = ExtResource("3_ybpuf")
+value = 1
+
+[sub_resource type="Resource" id="Resource_rr7tk"]
+script = ExtResource("2_mvplj")
+status = ExtResource("4_yu72e")
+stacks = SubResource("Resource_omjnx")
+target = ExtResource("5_f2rdn")
+
+[resource]
+script = ExtResource("6_0p878")
+id = &"demon_form"
+name = "悪魔化"
+art = ExtResource("1_mvplj")
+art_focus = 0.4
+type = 2
+rarity = 3
+cost = 3
+on_play = Array[ExtResource("1_sb5ee")]([SubResource("Resource_rr7tk")])
+text = "毎ターン開始時に筋力を 2 得る。"

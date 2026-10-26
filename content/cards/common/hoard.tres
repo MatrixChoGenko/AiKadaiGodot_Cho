@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_3trqu"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/hoard.png" id="1_5xi3d"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_5xi3d"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_e121h"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_3wlsc"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_nlgvi"]
+
+[sub_resource type="Resource" id="Resource_fp6ky"]
+script = ExtResource("2_5xi3d")
+count = 2
+allow_fewer = true
+
+[sub_resource type="Resource" id="Resource_3j4ej"]
+script = ExtResource("3_e121h")
+value = 3
+
+[sub_resource type="Resource" id="Resource_62bno"]
+script = ExtResource("4_3wlsc")
+count = SubResource("Resource_3j4ej")
+
+[resource]
+script = ExtResource("5_nlgvi")
+id = &"hoard"
+name = "溜め込み"
+art = ExtResource("1_5xi3d")
+type = 1
+on_play = Array[ExtResource("1_3trqu")]([SubResource("Resource_fp6ky"), SubResource("Resource_62bno")])
+text = "手札を 2 枚選んで捨て、3 枚引く。"

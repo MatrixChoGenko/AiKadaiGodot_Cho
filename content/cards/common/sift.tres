@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/sift.png" id="1_wm50u"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_y5vcw"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_wm50u"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_77d43"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_uag1j"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_mlv0f"]
+[ext_resource type="Resource" path="res://content/cards/common/sift_plus.tres" id="6_fk2i6"]
+
+[sub_resource type="Resource" id="Resource_ojyrf"]
+script = ExtResource("2_wm50u")
+
+[sub_resource type="Resource" id="Resource_s16wt"]
+script = ExtResource("3_77d43")
+value = 2
+
+[sub_resource type="Resource" id="Resource_y6b02"]
+script = ExtResource("4_uag1j")
+count = SubResource("Resource_s16wt")
+
+[resource]
+script = ExtResource("5_mlv0f")
+id = &"sift"
+name = "選別"
+art = ExtResource("1_wm50u")
+type = 1
+upgraded = ExtResource("6_fk2i6")
+on_play = Array[ExtResource("1_y5vcw")]([SubResource("Resource_ojyrf"), SubResource("Resource_y6b02")])
+text = "手札を 1 枚選んで捨て、2 枚引く。"

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PotionData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_2xxjx"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_vy72h"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="3_x0elq"]
+[ext_resource type="Script" path="res://src/content/data/potion_data.gd" id="4_go5eo"]
+
+[sub_resource type="Resource" id="Resource_pkeke"]
+script = ExtResource("2_vy72h")
+value = 2
+
+[sub_resource type="Resource" id="Resource_j1dia"]
+script = ExtResource("3_x0elq")
+amount = SubResource("Resource_pkeke")
+
+[resource]
+script = ExtResource("4_go5eo")
+id = &"energy"
+name = "活力ポーション"
+effects = Array[ExtResource("1_2xxjx")]([SubResource("Resource_j1dia")])
+text = "エネルギーを 2 得る。"

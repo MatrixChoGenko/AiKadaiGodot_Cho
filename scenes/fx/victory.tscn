@@ -1,0 +1,128 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/fx/victory_fx.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_confetti.png" id="2_confetti"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_sparkle.png" id="3_sparkle"]
+
+[sub_resource type="Gradient" id="Gradient_confetti_colors"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.17, 0.34, 0.5, 0.67, 0.84)
+colors = PackedColorArray(1, 0.35, 0.35, 1, 1, 0.8, 0.25, 1, 0.4, 0.85, 0.4, 1, 0.35, 0.65, 1, 1, 0.95, 0.5, 0.85, 1, 1, 0.6, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_confetti_colors"]
+gradient = SubResource("Gradient_confetti_colors")
+
+[sub_resource type="Gradient" id="Gradient_confetti_fade"]
+offsets = PackedFloat32Array(0, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_confetti_fade"]
+gradient = SubResource("Gradient_confetti_fade")
+
+[sub_resource type="Curve" id="Curve_pop"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pop"]
+curve = SubResource("Curve_pop")
+
+[sub_resource type="Gradient" id="Gradient_gold"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 0.85, 1, 1, 0.85, 0.4, 1, 1, 0.75, 0.3, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_gold"]
+gradient = SubResource("Gradient_gold")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_left"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(0.5, -1, 0)
+spread = 16.0
+initial_velocity_min = 1400.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 700, 0)
+damping_min = 250.0
+damping_max = 400.0
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+scale_min = 0.16
+scale_max = 0.26
+color_ramp = SubResource("GradientTexture_confetti_fade")
+color_initial_ramp = SubResource("GradientTexture_confetti_colors")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_right"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(-0.5, -1, 0)
+spread = 16.0
+initial_velocity_min = 1400.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 700, 0)
+damping_min = 250.0
+damping_max = 400.0
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+scale_min = 0.16
+scale_max = 0.26
+color_ramp = SubResource("GradientTexture_confetti_fade")
+color_initial_ramp = SubResource("GradientTexture_confetti_colors")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_sparkles"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(900, 40, 1)
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 180.0
+initial_velocity_max = 420.0
+gravity = Vector3(0, 0, 0)
+angle_min = -20.0
+angle_max = 20.0
+scale_min = 0.08
+scale_max = 0.16
+scale_curve = SubResource("CurveTexture_pop")
+color_ramp = SubResource("GradientTexture_gold")
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Sparkles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+texture = ExtResource("3_sparkle")
+lifetime = 1.8
+one_shot = true
+explosiveness = 0.3
+fixed_fps = 0
+visibility_rect = Rect2(-1200, -1400, 2400, 1500)
+process_material = SubResource("Process_sparkles")
+
+[node name="CannonLeft" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 60
+texture = ExtResource("2_confetti")
+lifetime = 2.6
+one_shot = true
+explosiveness = 0.85
+fixed_fps = 0
+visibility_rect = Rect2(-200, -1400, 2400, 1600)
+process_material = SubResource("Process_left")
+
+[node name="CannonRight" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 60
+texture = ExtResource("2_confetti")
+lifetime = 2.6
+one_shot = true
+explosiveness = 0.85
+fixed_fps = 0
+visibility_rect = Rect2(-2200, -1400, 2400, 1600)
+process_material = SubResource("Process_right")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/keyword_data.gd" id="1_w0sjj"]
+
+[resource]
+script = ExtResource("1_w0sjj")
+id = &"unplayable"
+kind = 16
+name = "プレイ不可"
+text = "自分からはプレイできない。他の効果で捨てる・廃棄するしかない。"

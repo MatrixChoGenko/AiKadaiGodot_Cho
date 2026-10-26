@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BackdropData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/backdrop_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/backgrounds/battle_forest_ruins_2.jpg" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"forest_ruins_2"
+texture = ExtResource("2_tex")
+rays_enabled = true
+ray_origin = Vector2(0.3, -0.2)
+ray_angle = 72.0
+ray_spread = 20.0
+ray_color = Color(0.62, 0.95, 0.82, 1)
+ray_intensity = 0.2
+ray_length = 1.3
+dust_amount = 0.45
+mist_amount = 0.22
+mist_color = Color(0.45, 0.66, 0.6, 1)
+mist_top = 0.45
+mist_bottom = 0.95
+fireflies_back = 0.3
+fireflies_front = 0.25
+firefly_color = Color(0.78, 1, 0.42, 1)

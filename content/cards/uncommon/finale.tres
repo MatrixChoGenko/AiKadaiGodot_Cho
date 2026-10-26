@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/finale.png" id="1_bikoc"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_yo04l"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_bikoc"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_12i01"]
+[ext_resource type="Script" path="res://src/content/values/impl/played_this_turn_value.gd" id="4_2c0l6"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/compare_condition.gd" id="5_sq2hg"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="6_rbi0y"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="7_h5lv3"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="8_3prok"]
+
+[sub_resource type="Resource" id="Resource_su4dg"]
+script = ExtResource("2_bikoc")
+value = 6
+
+[sub_resource type="Resource" id="Resource_63i55"]
+script = ExtResource("2_bikoc")
+value = 22
+
+[sub_resource type="Resource" id="Resource_ijlse"]
+script = ExtResource("4_2c0l6")
+type_filter = 1
+
+[sub_resource type="Resource" id="Resource_2hco0"]
+script = ExtResource("2_bikoc")
+value = 3
+
+[sub_resource type="Resource" id="Resource_4m4d7"]
+script = ExtResource("5_sq2hg")
+left = SubResource("Resource_ijlse")
+right = SubResource("Resource_2hco0")
+
+[sub_resource type="Resource" id="Resource_mhq8r"]
+script = ExtResource("3_12i01")
+when = SubResource("Resource_4m4d7")
+then = SubResource("Resource_63i55")
+otherwise = SubResource("Resource_su4dg")
+
+[sub_resource type="Resource" id="Resource_8gfie"]
+script = ExtResource("6_rbi0y")
+amount = SubResource("Resource_mhq8r")
+label = &"damage"
+target = ExtResource("7_h5lv3")
+
+[resource]
+script = ExtResource("8_3prok")
+id = &"finale"
+name = "フィナーレ"
+art = ExtResource("1_bikoc")
+rarity = 2
+aim = 1
+on_play = Array[ExtResource("1_yo04l")]([SubResource("Resource_8gfie")])
+text = "{damage} ダメージを与える（このターン 3 枚目以降のアタックなら 22）。"

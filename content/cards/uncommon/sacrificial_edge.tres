@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/sacrificial_edge.png" id="1_4dq51"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_s3bps"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_4dq51"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_q1pyq"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/hp_below_percent_condition.gd" id="4_41bwq"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_jag1d"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_45nqi"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_letnl"]
+
+[sub_resource type="Resource" id="Resource_u3k0w"]
+script = ExtResource("2_4dq51")
+value = 6
+
+[sub_resource type="Resource" id="Resource_47c7u"]
+script = ExtResource("2_4dq51")
+value = 15
+
+[sub_resource type="Resource" id="Resource_cdxcp"]
+script = ExtResource("4_41bwq")
+
+[sub_resource type="Resource" id="Resource_hh2mk"]
+script = ExtResource("3_q1pyq")
+when = SubResource("Resource_cdxcp")
+then = SubResource("Resource_47c7u")
+otherwise = SubResource("Resource_u3k0w")
+
+[sub_resource type="Resource" id="Resource_jus5g"]
+script = ExtResource("5_jag1d")
+amount = SubResource("Resource_hh2mk")
+label = &"damage"
+target = ExtResource("6_45nqi")
+
+[resource]
+script = ExtResource("7_letnl")
+id = &"sacrificial_edge"
+name = "生贄の刃"
+art = ExtResource("1_4dq51")
+rarity = 2
+aim = 1
+on_play = Array[ExtResource("1_s3bps")]([SubResource("Resource_jus5g")])
+text = "{damage} ダメージを与える（自分の HP が 50% 未満なら 15）。"

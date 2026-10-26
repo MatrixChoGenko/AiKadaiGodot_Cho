@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/keyword_data.gd" id="1_aa0lr"]
+
+[resource]
+script = ExtResource("1_aa0lr")
+id = &"innate"
+kind = 4
+name = "天賦"
+text = "戦闘開始の第 1 ターンに必ず初期手札に入る。"

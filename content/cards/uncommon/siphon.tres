@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_di16w"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/siphon.png" id="1_mv6pu"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_mv6pu"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_6l3y1"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_isgyg"]
+[ext_resource type="Script" path="res://src/content/values/impl/resolve_stat_value.gd" id="5_gidws"]
+[ext_resource type="Script" path="res://src/content/effects/impl/heal_effect.gd" id="6_1kce4"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_2p4ak"]
+
+[sub_resource type="Resource" id="Resource_aftvq"]
+script = ExtResource("2_mv6pu")
+value = 9
+
+[sub_resource type="Resource" id="Resource_bhj8f"]
+script = ExtResource("3_6l3y1")
+amount = SubResource("Resource_aftvq")
+label = &"damage"
+target = ExtResource("4_isgyg")
+
+[sub_resource type="Resource" id="Resource_638cm"]
+script = ExtResource("5_gidws")
+
+[sub_resource type="Resource" id="Resource_h0bgq"]
+script = ExtResource("6_1kce4")
+amount = SubResource("Resource_638cm")
+
+[resource]
+script = ExtResource("7_2p4ak")
+id = &"siphon"
+name = "吸収"
+art = ExtResource("1_mv6pu")
+art_focus = 0.4
+rarity = 2
+cost = 2
+aim = 1
+on_play = Array[ExtResource("1_di16w")]([SubResource("Resource_bhj8f"), SubResource("Resource_h0bgq")])
+text = "{damage} ダメージを与え、実際に与えたダメージと同じだけ HP を回復する。"

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="PotionData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_hrxgk"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_rf5qc"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_8kkm6"]
+[ext_resource type="Resource" path="res://content/statuses/weak.tres" id="4_726lv"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_23u11"]
+[ext_resource type="Script" path="res://src/content/data/potion_data.gd" id="6_hsi78"]
+
+[sub_resource type="Resource" id="Resource_uc51b"]
+script = ExtResource("3_8kkm6")
+value = 3
+
+[sub_resource type="Resource" id="Resource_fh40y"]
+script = ExtResource("2_rf5qc")
+status = ExtResource("4_726lv")
+stacks = SubResource("Resource_uc51b")
+label = &"weak"
+target = ExtResource("5_23u11")
+
+[resource]
+script = ExtResource("6_hsi78")
+id = &"weak"
+name = "弱体ポーション"
+rarity = 1
+aim = 1
+effects = Array[ExtResource("1_hrxgk")]([SubResource("Resource_fh40y")])
+text = "弱体を {weak} 付与する。"

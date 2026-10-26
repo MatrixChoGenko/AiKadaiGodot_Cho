@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/keyword_data.gd" id="1_bpl4i"]
+
+[resource]
+script = ExtResource("1_bpl4i")
+id = &"retain"
+kind = 2
+name = "保留"
+text = "ターン終了時に捨てられず、手札に残って次のターンへ持ち越す。"

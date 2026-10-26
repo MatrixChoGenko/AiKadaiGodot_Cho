@@ -1,0 +1,166 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_shield.png" id="2_fx_shield"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_glass.png" id="3_fx_glass"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_sparkle.png" id="4_fx_sparkle"]
+
+[sub_resource type="Curve" id="Curve_Flash"]
+_data = [Vector2(0.0, 1.0), 0.0, 0.0, 0, 0, Vector2(0.3, 1.15), 0.0, 0.0, 0, 0, Vector2(1.0, 0.4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Flash"]
+curve = SubResource("Curve_Flash")
+
+[sub_resource type="Gradient" id="Gradient_Flash"]
+offsets = PackedFloat32Array(0.0, 0.5, 1.0)
+colors = PackedColorArray(1.0, 1.0, 1.0, 1.0, 0.6, 0.9, 1.0, 0.8, 0.4, 0.7, 1.0, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Flash"]
+gradient = SubResource("Gradient_Flash")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Flash"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.9
+scale_max = 1.9
+scale_curve = SubResource("CurveTexture_Flash")
+color_ramp = SubResource("GradientTexture_Flash")
+
+[sub_resource type="StandardMaterial3D" id="Material_Flash"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_shield")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Flash"]
+material = SubResource("Material_Flash")
+
+[sub_resource type="Curve" id="Curve_Glass"]
+_data = [Vector2(0.0, 1.0), 0.0, 0.0, 0, 0, Vector2(0.7, 0.9), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Glass"]
+curve = SubResource("Curve_Glass")
+
+[sub_resource type="Gradient" id="Gradient_Glass"]
+offsets = PackedFloat32Array(0.0, 0.3, 1.0)
+colors = PackedColorArray(1.0, 1.0, 1.0, 1.0, 0.65, 0.9, 1.0, 1.0, 0.35, 0.6, 1.0, 1.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Glass"]
+gradient = SubResource("Gradient_Glass")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Glass"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.7
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -14, 0)
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+scale_min = 0.28
+scale_max = 0.48
+scale_curve = SubResource("CurveTexture_Glass")
+color_ramp = SubResource("GradientTexture_Glass")
+
+[sub_resource type="StandardMaterial3D" id="Material_Glass"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_fx_glass")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Glass"]
+material = SubResource("Material_Glass")
+
+[sub_resource type="Curve" id="Curve_Sparkles"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Sparkles"]
+curve = SubResource("Curve_Sparkles")
+
+[sub_resource type="Gradient" id="Gradient_Sparkles"]
+offsets = PackedFloat32Array(0.0, 1.0)
+colors = PackedColorArray(1.0, 1.0, 1.0, 1.0, 0.6, 0.9, 1.0, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Sparkles"]
+gradient = SubResource("Gradient_Sparkles")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Sparkles"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.6
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_Sparkles")
+color_ramp = SubResource("GradientTexture_Sparkles")
+
+[sub_resource type="StandardMaterial3D" id="Material_Sparkles"]
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_fx_sparkle")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Sparkles"]
+material = SubResource("Material_Sparkles")
+
+[node name="BlockShatter" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Flash" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.2
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Flash")
+draw_pass_1 = SubResource("Quad_Flash")
+
+[node name="Glass" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 12
+lifetime = 0.65
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Glass")
+draw_pass_1 = SubResource("Quad_Glass")
+
+[node name="Sparkles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.4
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Sparkles")
+draw_pass_1 = SubResource("Quad_Sparkles")

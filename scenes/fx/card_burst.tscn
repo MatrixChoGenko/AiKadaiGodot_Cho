@@ -1,0 +1,139 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/fx/particle_fx.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_soft.png" id="2_soft"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_ring.png" id="3_ring"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_sparkle.png" id="4_sparkle"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_shard.png" id="5_shard"]
+
+[sub_resource type="CanvasItemMaterial" id="Material_add"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_pop"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pop"]
+curve = SubResource("Curve_pop")
+
+[sub_resource type="Curve" id="Curve_grow"]
+_data = [Vector2(0, 0.25), 0.0, 2.5, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_grow"]
+curve = SubResource("Curve_grow")
+
+[sub_resource type="Curve" id="Curve_shrink"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_shrink"]
+curve = SubResource("Curve_shrink")
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_fade"]
+gradient = SubResource("Gradient_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_flash"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.6
+scale_max = 1.6
+scale_curve = SubResource("CurveTexture_pop")
+color_ramp = SubResource("GradientTexture_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_ring"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_grow")
+color_ramp = SubResource("GradientTexture_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_sparkles"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 250.0
+initial_velocity_max = 550.0
+gravity = Vector3(0, 150, 0)
+damping_min = 500.0
+damping_max = 800.0
+angle_min = -30.0
+angle_max = 30.0
+scale_min = 0.1
+scale_max = 0.18
+scale_curve = SubResource("CurveTexture_pop")
+color_ramp = SubResource("GradientTexture_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_shards"]
+lifetime_randomness = 0.3
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 850.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1200.0
+damping_max = 1600.0
+scale_min = 0.16
+scale_max = 0.24
+scale_curve = SubResource("CurveTexture_shrink")
+color_ramp = SubResource("GradientTexture_fade")
+
+[node name="CardBurst" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_script")
+tinted = Array[StringName]([&"Ring", &"Sparkles", &"Shards"])
+
+[node name="Flash" type="GPUParticles2D" parent="."]
+material = SubResource("Material_add")
+emitting = false
+amount = 1
+texture = ExtResource("2_soft")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_rect = Rect2(-400, -400, 800, 800)
+process_material = SubResource("Process_flash")
+
+[node name="Ring" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("3_ring")
+lifetime = 0.28
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_rect = Rect2(-400, -400, 800, 800)
+process_material = SubResource("Process_ring")
+
+[node name="Shards" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 8
+texture = ExtResource("5_shard")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_rect = Rect2(-400, -400, 800, 800)
+process_material = SubResource("Process_shards")
+
+[node name="Sparkles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 12
+texture = ExtResource("4_sparkle")
+lifetime = 0.55
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 0
+visibility_rect = Rect2(-400, -400, 800, 800)
+process_material = SubResource("Process_sparkles")

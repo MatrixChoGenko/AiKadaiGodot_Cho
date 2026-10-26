@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/blood_pact.png" id="1_2lm4i"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_5j7xd"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_2lm4i"]
+[ext_resource type="Script" path="res://src/content/effects/impl/lose_hp_effect.gd" id="3_cpqb1"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="4_iqfrn"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_lcxjq"]
+
+[sub_resource type="Resource" id="Resource_x5a8a"]
+script = ExtResource("2_2lm4i")
+value = 5
+
+[sub_resource type="Resource" id="Resource_p80jv"]
+script = ExtResource("3_cpqb1")
+amount = SubResource("Resource_x5a8a")
+
+[sub_resource type="Resource" id="Resource_glpcy"]
+script = ExtResource("2_2lm4i")
+value = 2
+
+[sub_resource type="Resource" id="Resource_dsxw0"]
+script = ExtResource("4_iqfrn")
+amount = SubResource("Resource_glpcy")
+
+[resource]
+script = ExtResource("5_lcxjq")
+id = &"blood_pact"
+name = "血の契約"
+art = ExtResource("1_2lm4i")
+type = 1
+cost = 0
+on_play = Array[ExtResource("1_5j7xd")]([SubResource("Resource_p80jv"), SubResource("Resource_dsxw0")])
+text = "HP を 5 失い、エネルギーを 2 得る。"

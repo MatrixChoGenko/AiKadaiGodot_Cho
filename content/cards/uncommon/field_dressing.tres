@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/field_dressing.png" id="1_0ub5i"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_11aun"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_0ub5i"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_ynxtl"]
+[ext_resource type="Resource" path="res://content/statuses/regenerate.tres" id="4_bnupp"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_rnxxm"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_nvaqd"]
+
+[sub_resource type="Resource" id="Resource_pueco"]
+script = ExtResource("3_ynxtl")
+value = 5
+
+[sub_resource type="Resource" id="Resource_ssx25"]
+script = ExtResource("2_0ub5i")
+status = ExtResource("4_bnupp")
+stacks = SubResource("Resource_pueco")
+label = &"regenerate"
+target = ExtResource("5_rnxxm")
+
+[resource]
+script = ExtResource("6_nvaqd")
+id = &"field_dressing"
+name = "応急手当"
+art = ExtResource("1_0ub5i")
+type = 1
+rarity = 2
+on_play = Array[ExtResource("1_11aun")]([SubResource("Resource_ssx25")])
+text = "再生を {regenerate} 得る。"

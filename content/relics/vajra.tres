@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_m4g67"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/grant_status_on_combat_start.gd" id="2_wrds0"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="3_4nwea"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="4_1m3s4"]
+
+[sub_resource type="Resource" id="Resource_4m3s3"]
+script = ExtResource("2_wrds0")
+status = ExtResource("3_4nwea")
+
+[resource]
+script = ExtResource("4_1m3s4")
+id = &"vajra"
+name = "金剛杵"
+behaviors = Array[ExtResource("1_m4g67")]([SubResource("Resource_4m3s3")])
+text = "各戦闘の開始時に筋力を 1 得る。"

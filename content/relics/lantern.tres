@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_nq1w3"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/turn_resources.gd" id="2_t6p6g"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_pp8qj"]
+
+[sub_resource type="Resource" id="Resource_y3eal"]
+script = ExtResource("2_t6p6g")
+energy = 1
+first_turn_only = true
+
+[resource]
+script = ExtResource("3_pp8qj")
+id = &"lantern"
+name = "提灯"
+rarity = 2
+behaviors = Array[ExtResource("1_nq1w3")]([SubResource("Resource_y3eal")])
+text = "各戦闘の第 1 ターンに追加でエネルギーを 1 得る。"

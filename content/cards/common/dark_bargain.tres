@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_fquvo"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/dark_bargain.png" id="1_ryyuw"]
+[ext_resource type="Resource" path="res://content/cards/status/wound.tres" id="2_ryyuw"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_duk1j"]
+[ext_resource type="Script" path="res://src/content/effects/impl/create_card_effect.gd" id="4_1f5ed"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="5_i4ah0"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_psf8i"]
+
+[sub_resource type="Resource" id="Resource_swcai"]
+script = ExtResource("3_duk1j")
+value = 2
+
+[sub_resource type="Resource" id="Resource_oj2ad"]
+script = ExtResource("4_1f5ed")
+card = ExtResource("2_ryyuw")
+count = SubResource("Resource_swcai")
+temporary = true
+
+[sub_resource type="Resource" id="Resource_6s0xp"]
+script = ExtResource("3_duk1j")
+value = 2
+
+[sub_resource type="Resource" id="Resource_txvoa"]
+script = ExtResource("5_i4ah0")
+amount = SubResource("Resource_6s0xp")
+
+[resource]
+script = ExtResource("6_psf8i")
+id = &"dark_bargain"
+name = "闇の取引"
+art = ExtResource("1_ryyuw")
+type = 1
+cost = 0
+on_play = Array[ExtResource("1_fquvo")]([SubResource("Resource_oj2ad"), SubResource("Resource_txvoa")])
+text = "「傷」を 2 枚捨て札に入れ、エネルギーを 2 得る。"

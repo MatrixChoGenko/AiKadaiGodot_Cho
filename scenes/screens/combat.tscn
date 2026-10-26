@@ -1,0 +1,389 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/combat/combat_screen.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/combat/unit_view.tscn" id="2_unit"]
+[ext_resource type="Script" path="res://src/presentation/widgets/glyph_badge.gd" id="3_glyph"]
+[ext_resource type="Script" path="res://src/presentation/combat/hand_view.gd" id="4_hand"]
+[ext_resource type="Script" path="res://src/presentation/combat/target_arrow.gd" id="5_arrow"]
+[ext_resource type="Script" path="res://src/presentation/combat/combat_presenter.gd" id="6_presenter"]
+[ext_resource type="Script" path="res://src/presentation/combat/hand_input.gd" id="7_input"]
+[ext_resource type="Script" path="res://src/presentation/widgets/potion_bar.gd" id="8_potions"]
+[ext_resource type="Script" path="res://src/presentation/stage/battle_stage.gd" id="9_stage"]
+[ext_resource type="Script" path="res://src/presentation/combat/target_rings.gd" id="11_rings"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/energy_orb.png" id="12_orb"]
+[ext_resource type="Script" path="res://src/presentation/combat/battle_ambience.gd" id="14_ambience"]
+[ext_resource type="Shader" path="res://assets/shaders/ground_mist.gdshader" id="15_mist"]
+[ext_resource type="Shader" path="res://assets/shaders/god_rays.gdshader" id="16_rays"]
+[ext_resource type="Shader" path="res://assets/shaders/fireflies.gdshader" id="17_fireflies"]
+[ext_resource type="Script" path="res://src/presentation/combat/turn_banner.gd" id="19_banner"]
+[ext_resource type="Script" path="res://src/presentation/widgets/pile_button.gd" id="20_pile"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/pile_draw.png" id="21_pile_draw"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/pile_discard.png" id="22_pile_discard"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/pile_exhaust.png" id="23_pile_exhaust"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mist"]
+shader = ExtResource("15_mist")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rays"]
+shader = ExtResource("16_rays")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fireflies_back"]
+shader = ExtResource("17_fireflies")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fireflies_front"]
+shader = ExtResource("17_fireflies")
+shader_parameter/brightness = 0.7
+shader_parameter/cell_px = 340.0
+shader_parameter/core_px = 4.5
+shader_parameter/halo_px = 30.0
+shader_parameter/halo_amount = 0.45
+shader_parameter/drift = Vector2(12, -5)
+shader_parameter/y_top = 0.12
+shader_parameter/y_bottom = 0.6
+shader_parameter/seed = 3.0
+
+[node name="CombatScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Ambience" type="Control" parent="." node_paths=PackedStringArray("front")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_ambience")
+front = NodePath("../AmbienceFront")
+
+[node name="Mist" type="ColorRect" parent="Ambience"]
+visible = false
+material = SubResource("ShaderMaterial_mist")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Rays" type="ColorRect" parent="Ambience"]
+visible = false
+material = SubResource("ShaderMaterial_rays")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fireflies" type="ColorRect" parent="Ambience"]
+visible = false
+material = SubResource("ShaderMaterial_fireflies_back")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Field" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Rings" type="Control" parent="Field"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_rings")
+
+[node name="Stage" type="SubViewportContainer" parent="Field"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("9_stage")
+
+[node name="PlayerView" parent="Field" instance=ExtResource("2_unit")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 230.0
+offset_top = 360.0
+offset_right = 480.0
+offset_bottom = 784.0
+
+[node name="EnemyRow" type="HBoxContainer" parent="Field"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1180.0
+offset_top = 360.0
+offset_right = -90.0
+offset_bottom = 784.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="AmbienceFront" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fireflies_front")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Banner" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("19_banner")
+
+[node name="Potions" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 260.0
+offset_bottom = 68.0
+script = ExtResource("8_potions")
+
+[node name="EnergyOrbArt" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 4
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -440.0
+offset_right = 210.0
+offset_bottom = -290.0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("12_orb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyOrb" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -440.0
+offset_right = 210.0
+offset_bottom = -290.0
+grow_vertical = 0
+tooltip_text = "エネルギー（現在 / このターンの上限）"
+script = ExtResource("3_glyph")
+text = "3/3"
+fill = Color(0, 0, 0, 0)
+font_size = 40
+outline_width = 0.0
+
+[node name="DrawButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -170.0
+offset_right = 170.0
+offset_bottom = -20.0
+grow_vertical = 0
+tooltip_text = "山札
+次に引くカード。クリックで中身を見る（順番は伏せる）。"
+icon = ExtResource("21_pile_draw")
+script = ExtResource("20_pile")
+
+[node name="DiscardButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -170.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "捨て札
+使ったカードと、ターン終了で捨てたカード。山札が尽きるとシャッフルして山札に戻る。"
+icon = ExtResource("22_pile_discard")
+script = ExtResource("20_pile")
+
+[node name="ExhaustButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -250.0
+offset_right = -38.0
+offset_bottom = -160.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "廃棄札
+廃棄したカード。この戦闘ではもう使えない。"
+icon = ExtResource("23_pile_exhaust")
+script = ExtResource("20_pile")
+badge_radius = 15.0
+
+[node name="EndTurnButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -330.0
+offset_right = -40.0
+offset_bottom = -246.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonEndTurn"
+text = "ターン終了"
+
+[node name="Hand" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("4_hand")
+
+[node name="Arrow" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_arrow")
+
+[node name="Toast" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 50.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.75, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "エネルギー不足"
+horizontal_alignment = 1
+
+[node name="ResultPanel" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="ResultPanel"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_type_variation = &"PanelCard"
+
+[node name="Column" type="VBoxContainer" parent="ResultPanel/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ResultTitle" type="Label" parent="ResultPanel/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
+text = "勝利！"
+horizontal_alignment = 1
+
+[node name="ResultInfo" type="Label" parent="ResultPanel/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ResultPanel/Panel/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"ButtonPrimary"
+text = "続ける"
+
+[node name="Presenter" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_presenter")
+
+[node name="Input" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_input")

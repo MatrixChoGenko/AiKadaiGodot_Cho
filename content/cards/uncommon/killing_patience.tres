@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/killing_patience.png" id="1_qchji"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_vkugg"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_qchji"]
+[ext_resource type="Script" path="res://src/content/values/impl/card_retained_turns_value.gd" id="3_ac8ri"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_0mf6t"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_76ae5"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_wd215"]
+
+[sub_resource type="Resource" id="Resource_o2645"]
+script = ExtResource("3_ac8ri")
+
+[sub_resource type="Resource" id="Resource_ajao2"]
+script = ExtResource("2_qchji")
+base = 5
+per = 7
+unit = SubResource("Resource_o2645")
+
+[sub_resource type="Resource" id="Resource_3huj4"]
+script = ExtResource("4_0mf6t")
+amount = SubResource("Resource_ajao2")
+label = &"damage"
+target = ExtResource("5_76ae5")
+
+[resource]
+script = ExtResource("6_wd215")
+id = &"killing_patience"
+name = "好機を待つ"
+art = ExtResource("1_qchji")
+rarity = 2
+cost = 0
+aim = 1
+keywords = 3
+on_play = Array[ExtResource("1_vkugg")]([SubResource("Resource_3huj4")])
+text = "{damage} ダメージを与える（保留ターン 1 につき +7）。"

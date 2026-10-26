@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/hold_fast.png" id="1_8l3rq"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_8qmvv"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_8l3rq"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_0spm4"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_e2x01"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_vdo6y"]
+
+[sub_resource type="Resource" id="Resource_smlq7"]
+script = ExtResource("2_8l3rq")
+action = 2
+
+[sub_resource type="Resource" id="Resource_qd533"]
+script = ExtResource("3_0spm4")
+value = 1
+
+[sub_resource type="Resource" id="Resource_tbeqh"]
+script = ExtResource("4_e2x01")
+count = SubResource("Resource_qd533")
+
+[resource]
+script = ExtResource("5_vdo6y")
+id = &"hold_fast"
+name = "保持"
+art = ExtResource("1_8l3rq")
+type = 1
+cost = 0
+on_play = Array[ExtResource("1_8qmvv")]([SubResource("Resource_smlq7"), SubResource("Resource_tbeqh")])
+text = "手札を 1 枚選んでこのターン保留し、1 枚引く。"

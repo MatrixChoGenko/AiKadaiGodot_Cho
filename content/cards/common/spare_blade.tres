@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/spare_blade.png" id="1_76266"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_hidrq"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_76266"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_h4b2q"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_v1ppe"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_u5fmw"]
+[ext_resource type="Resource" path="res://content/cards/common/spare_blade_plus.tres" id="6_q8ip8"]
+
+[sub_resource type="Resource" id="Resource_0i14a"]
+script = ExtResource("2_76266")
+value = 5
+
+[sub_resource type="Resource" id="Resource_msk86"]
+script = ExtResource("3_h4b2q")
+amount = SubResource("Resource_0i14a")
+label = &"damage"
+target = ExtResource("4_v1ppe")
+
+[resource]
+script = ExtResource("5_u5fmw")
+id = &"spare_blade"
+name = "予備の刃"
+art = ExtResource("1_76266")
+cost = 0
+aim = 1
+keywords = 2
+upgraded = ExtResource("6_q8ip8")
+on_play = Array[ExtResource("1_hidrq")]([SubResource("Resource_msk86")])
+text = "{damage} ダメージを与える。"

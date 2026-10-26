@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="EventData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/event_option.gd" id="1_qkkyk"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_effect.gd" id="2_hi26y"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/add_card_run_effect.gd" id="3_qjuit"]
+[ext_resource type="Resource" path="res://content/cards/curse/injury.tres" id="4_xxhg8"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/gold_run_effect.gd" id="5_qenpl"]
+[ext_resource type="Resource" path="res://content/cards/curse/doubt.tres" id="6_d6763"]
+[ext_resource type="Script" path="res://src/content/data/event_data.gd" id="7_2amyp"]
+
+[sub_resource type="Resource" id="Resource_27c7i"]
+script = ExtResource("3_qjuit")
+pool = 1
+choose_from = 3
+
+[sub_resource type="Resource" id="Resource_ftw81"]
+script = ExtResource("3_qjuit")
+card = ExtResource("4_xxhg8")
+
+[sub_resource type="Resource" id="Resource_7rkih"]
+script = ExtResource("1_qkkyk")
+text = "力を受け入れる"
+detail = "ランダムな 3 枚から 1 枚を選び、呪い「負傷」を得る"
+effects = Array[ExtResource("2_hi26y")]([SubResource("Resource_27c7i"), SubResource("Resource_ftw81")])
+result_text = "力が流れ込み、同時に体のどこかが軋んだ。"
+
+[sub_resource type="Resource" id="Resource_5n1nk"]
+script = ExtResource("5_qenpl")
+amount = 120
+
+[sub_resource type="Resource" id="Resource_kfwty"]
+script = ExtResource("3_qjuit")
+card = ExtResource("6_d6763")
+count = 2
+
+[sub_resource type="Resource" id="Resource_b2i6k"]
+script = ExtResource("1_qkkyk")
+text = "神像を略奪する"
+detail = "+120 ゴールド、呪い「疑念」を 2 枚得る"
+effects = Array[ExtResource("2_hi26y")]([SubResource("Resource_5n1nk"), SubResource("Resource_kfwty")])
+result_text = "囁きが頭から離れない。"
+
+[sub_resource type="Resource" id="Resource_2p4em"]
+script = ExtResource("1_qkkyk")
+text = "耳をふさいで立ち去る"
+result_text = "囁きは次第に遠ざかった。"
+
+[resource]
+script = ExtResource("7_2amyp")
+id = &"whispering_idol"
+title = "囁く神像"
+body = "黒い石の神像が、あなたの名を囁いている。"
+options = Array[ExtResource("1_qkkyk")]([SubResource("Resource_7rkih"), SubResource("Resource_b2i6k"), SubResource("Resource_2p4em")])

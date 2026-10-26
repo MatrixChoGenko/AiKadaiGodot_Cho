@@ -1,0 +1,164 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_burst.png" id="2_fx_burst"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_bubble.png" id="3_fx_bubble"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_drop.png" id="4_fx_drop"]
+
+[sub_resource type="Curve" id="Curve_Splash"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Splash"]
+curve = SubResource("Curve_Splash")
+
+[sub_resource type="Gradient" id="Gradient_Splash"]
+offsets = PackedFloat32Array(0.0, 1.0)
+colors = PackedColorArray(0.85, 1.0, 0.6, 1.0, 0.35, 0.8, 0.2, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Splash"]
+gradient = SubResource("Gradient_Splash")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Splash"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angle_min = -30.0
+angle_max = 30.0
+scale_min = 1.3
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_Splash")
+color_ramp = SubResource("GradientTexture_Splash")
+
+[sub_resource type="StandardMaterial3D" id="Material_Splash"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_fx_burst")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Splash"]
+material = SubResource("Material_Splash")
+
+[sub_resource type="Curve" id="Curve_Bubbles"]
+_data = [Vector2(0.0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.75, 1.0), 0.0, 0.0, 0, 0, Vector2(0.9, 1.3), 0.0, 0.0, 0, 0, Vector2(1.0, 1.3), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_Bubbles"]
+curve = SubResource("Curve_Bubbles")
+
+[sub_resource type="Gradient" id="Gradient_Bubbles"]
+offsets = PackedFloat32Array(0.0, 0.85, 0.9, 1.0)
+colors = PackedColorArray(0.75, 1.0, 0.5, 1.0, 0.45, 0.9, 0.3, 1.0, 0.45, 0.9, 0.3, 0.0, 0.45, 0.9, 0.3, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Bubbles"]
+gradient = SubResource("Gradient_Bubbles")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Bubbles"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 40.0
+initial_velocity_min = 0.8
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.35
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_Bubbles")
+color_ramp = SubResource("GradientTexture_Bubbles")
+
+[sub_resource type="StandardMaterial3D" id="Material_Bubbles"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_fx_bubble")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Bubbles"]
+material = SubResource("Material_Bubbles")
+
+[sub_resource type="Curve" id="Curve_Drops"]
+_data = [Vector2(0.0, 1.0), 0.0, 0.0, 0, 0, Vector2(0.8, 1.0), 0.0, 0.0, 0, 0, Vector2(1.0, 0.3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_Drops"]
+curve = SubResource("Curve_Drops")
+
+[sub_resource type="Gradient" id="Gradient_Drops"]
+offsets = PackedFloat32Array(0.0, 0.8, 1.0)
+colors = PackedColorArray(0.8, 1.0, 0.55, 1.0, 0.4, 0.85, 0.25, 1.0, 0.4, 0.85, 0.25, 0.0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_Drops"]
+gradient = SubResource("Gradient_Drops")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_Drops"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 55.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -14, 0)
+scale_min = 0.26
+scale_max = 0.38
+scale_curve = SubResource("CurveTexture_Drops")
+color_ramp = SubResource("GradientTexture_Drops")
+
+[sub_resource type="StandardMaterial3D" id="Material_Drops"]
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_fx_drop")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_Drops"]
+material = SubResource("Material_Drops")
+
+[node name="PoisonApply" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.18
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Splash")
+draw_pass_1 = SubResource("Quad_Splash")
+
+[node name="Bubbles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 8
+lifetime = 0.6
+one_shot = true
+local_coords = true
+explosiveness = 0.7
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Bubbles")
+draw_pass_1 = SubResource("Quad_Bubbles")
+
+[node name="Drops" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 6
+lifetime = 0.7
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_Drops")
+draw_pass_1 = SubResource("Quad_Drops")

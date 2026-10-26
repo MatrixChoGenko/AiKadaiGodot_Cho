@@ -1,0 +1,151 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/stage/stage_effect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_shield.png" id="2_shield"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_ring.png" id="3_ring"]
+[ext_resource type="Texture2D" path="res://assets/textures/fx/fx_sparkle.png" id="4_sparkle"]
+
+[sub_resource type="Curve" id="Curve_settle"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1.1), 0.0, 0.0, 0, 0, Vector2(0.35, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_settle"]
+curve = SubResource("Curve_settle")
+
+[sub_resource type="Curve" id="Curve_grow"]
+_data = [Vector2(0, 0.4), 0.0, 2.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_grow"]
+curve = SubResource("Curve_grow")
+
+[sub_resource type="Curve" id="Curve_pop"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pop"]
+curve = SubResource("Curve_pop")
+
+[sub_resource type="Gradient" id="Gradient_shield"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.55, 0.85, 1, 0.9, 0.35, 0.6, 1, 0.75, 0.3, 0.55, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_shield"]
+gradient = SubResource("Gradient_shield")
+
+[sub_resource type="Gradient" id="Gradient_cold"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 1, 1, 0.7, 0.55, 0.88, 1, 0.6, 0.3, 0.6, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_cold"]
+gradient = SubResource("Gradient_cold")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_shield"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.1
+scale_max = 2.1
+scale_curve = SubResource("CurveTexture_settle")
+color_ramp = SubResource("GradientTexture_shield")
+
+[sub_resource type="StandardMaterial3D" id="Material_shield"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_shield")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_shield"]
+material = SubResource("Material_shield")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_ring"]
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.6
+scale_max = 2.6
+scale_curve = SubResource("CurveTexture_grow")
+color_ramp = SubResource("GradientTexture_cold")
+
+[sub_resource type="StandardMaterial3D" id="Material_ring"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_ring")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_ring"]
+material = SubResource("Material_ring")
+
+[sub_resource type="ParticleProcessMaterial" id="Process_sparkles"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0.8, 0.7, 0)
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.2
+gravity = Vector3(0, 0, 0)
+scale_min = 0.22
+scale_max = 0.38
+scale_curve = SubResource("CurveTexture_pop")
+color_ramp = SubResource("GradientTexture_cold")
+
+[sub_resource type="StandardMaterial3D" id="Material_sparkles"]
+render_priority = 2
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_sparkle")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_sparkles"]
+material = SubResource("Material_sparkles")
+
+[node name="BlockGain" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Shield" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.55
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_shield")
+draw_pass_1 = SubResource("Quad_shield")
+
+[node name="Ring" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.35
+one_shot = true
+local_coords = true
+explosiveness = 1.0
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_ring")
+draw_pass_1 = SubResource("Quad_ring")
+
+[node name="Sparkles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 8
+lifetime = 0.7
+one_shot = true
+local_coords = true
+explosiveness = 0.7
+fixed_fps = 0
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+process_material = SubResource("Process_sparkles")
+draw_pass_1 = SubResource("Quad_sparkles")

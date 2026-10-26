@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_tbtvv"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/damage_percent.gd" id="2_dwr74"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_72a2i"]
+
+[sub_resource type="Resource" id="Resource_fgob5"]
+script = ExtResource("2_dwr74")
+direction = 1
+percent = 50
+
+[resource]
+script = ExtResource("3_72a2i")
+id = &"vulnerable"
+name = "脆弱"
+polarity = 1
+decay = 1
+behaviors = Array[ExtResource("1_tbtvv")]([SubResource("Resource_fgob5")])
+text = "受ける攻撃ダメージが 50% 増える。残り {stacks} ラウンド。"

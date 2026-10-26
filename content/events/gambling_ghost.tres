@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="EventData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/event_option.gd" id="1_ythk4"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_effect.gd" id="2_7p3hy"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/gold_run_effect.gd" id="3_1h0u7"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/random_run_effect.gd" id="4_eexc0"]
+[ext_resource type="Script" path="res://src/content/run_effects/conditions/gold_at_least_run_condition.gd" id="5_wl1m3"]
+[ext_resource type="Script" path="res://src/content/data/event_data.gd" id="6_w6s5t"]
+
+[sub_resource type="Resource" id="Resource_dgn3c"]
+script = ExtResource("3_1h0u7")
+amount = -50
+
+[sub_resource type="Resource" id="Resource_da74i"]
+script = ExtResource("3_1h0u7")
+amount = 130
+
+[sub_resource type="Resource" id="Resource_ntgja"]
+script = ExtResource("4_eexc0")
+then = Array[ExtResource("2_7p3hy")]([SubResource("Resource_da74i")])
+
+[sub_resource type="Resource" id="Resource_q3cvn"]
+script = ExtResource("5_wl1m3")
+value = 50
+
+[sub_resource type="Resource" id="Resource_phuy3"]
+script = ExtResource("1_ythk4")
+text = "50 ゴールドを賭ける"
+detail = "50% で 130 ゴールドを得る"
+requires = SubResource("Resource_q3cvn")
+disabled_hint = "ゴールドが足りない"
+effects = Array[ExtResource("2_7p3hy")]([SubResource("Resource_dgn3c"), SubResource("Resource_ntgja")])
+result_text = "サイコロが止まった。"
+
+[sub_resource type="Resource" id="Resource_l5uum"]
+script = ExtResource("1_ythk4")
+text = "賭けない"
+result_text = "亡霊はつまらなそうに消えた。"
+
+[resource]
+script = ExtResource("6_w6s5t")
+id = &"gambling_ghost"
+title = "博徒の亡霊"
+body = "半透明の男がサイコロを転がしている。「一勝負どうだい？」"
+options = Array[ExtResource("1_ythk4")]([SubResource("Resource_phuy3"), SubResource("Resource_l5uum")])

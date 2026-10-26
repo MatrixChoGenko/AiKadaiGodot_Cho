@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="EventData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/event_option.gd" id="1_wk2fw"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_effect.gd" id="2_7vkwe"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/gold_run_effect.gd" id="3_khsh4"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/upgrade_card_run_effect.gd" id="4_owh5e"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_condition.gd" id="5_inxvw"]
+[ext_resource type="Script" path="res://src/content/run_effects/conditions/gold_at_least_run_condition.gd" id="6_m76t7"]
+[ext_resource type="Script" path="res://src/content/run_effects/conditions/has_upgradable_card_run_condition.gd" id="7_3hs0r"]
+[ext_resource type="Script" path="res://src/content/run_effects/conditions/all_of_run_condition.gd" id="8_iofun"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/remove_card_run_effect.gd" id="9_5b2ie"]
+[ext_resource type="Script" path="res://src/content/data/event_data.gd" id="10_cx76h"]
+
+[sub_resource type="Resource" id="Resource_e7gpp"]
+script = ExtResource("3_khsh4")
+amount = -50
+
+[sub_resource type="Resource" id="Resource_qcq11"]
+script = ExtResource("4_owh5e")
+
+[sub_resource type="Resource" id="Resource_tckyh"]
+script = ExtResource("6_m76t7")
+value = 50
+
+[sub_resource type="Resource" id="Resource_6c18y"]
+script = ExtResource("7_3hs0r")
+
+[sub_resource type="Resource" id="Resource_orh1i"]
+script = ExtResource("8_iofun")
+conditions = Array[ExtResource("5_inxvw")]([SubResource("Resource_tckyh"), SubResource("Resource_6c18y")])
+
+[sub_resource type="Resource" id="Resource_i7hwy"]
+script = ExtResource("1_wk2fw")
+text = "研いでもらう"
+detail = "50 ゴールド：カードを 1 枚アップグレード"
+requires = SubResource("Resource_orh1i")
+disabled_hint = "ゴールドが足りないか、アップグレードできるカードがない"
+effects = Array[ExtResource("2_7vkwe")]([SubResource("Resource_e7gpp"), SubResource("Resource_qcq11")])
+result_text = "鍛冶屋は手際よく刃を打ち直した。"
+
+[sub_resource type="Resource" id="Resource_evgsc"]
+script = ExtResource("3_khsh4")
+amount = -75
+
+[sub_resource type="Resource" id="Resource_te3mo"]
+script = ExtResource("9_5b2ie")
+
+[sub_resource type="Resource" id="Resource_iselb"]
+script = ExtResource("6_m76t7")
+value = 75
+
+[sub_resource type="Resource" id="Resource_ducoe"]
+script = ExtResource("1_wk2fw")
+text = "お荷物を捨てる"
+detail = "75 ゴールド：カードを 1 枚削除"
+requires = SubResource("Resource_iselb")
+disabled_hint = "ゴールドが足りない"
+effects = Array[ExtResource("2_7vkwe")]([SubResource("Resource_evgsc"), SubResource("Resource_te3mo")])
+result_text = "鍛冶屋は不要なものを炉に放り込んだ。"
+
+[sub_resource type="Resource" id="Resource_gfydy"]
+script = ExtResource("1_wk2fw")
+text = "断る"
+result_text = "あなたは礼を言って立ち去った。"
+
+[resource]
+script = ExtResource("10_cx76h")
+id = &"wandering_smith"
+title = "旅の鍛冶屋"
+body = "金床を背負った鍛冶屋が、道端で火を起こしている。"
+options = Array[ExtResource("1_wk2fw")]([SubResource("Resource_i7hwy"), SubResource("Resource_ducoe"), SubResource("Resource_gfydy")])

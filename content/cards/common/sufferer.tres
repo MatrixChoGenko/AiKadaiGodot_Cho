@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_40oh0"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/sufferer.png" id="1_jfkqp"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_jfkqp"]
+[ext_resource type="Script" path="res://src/content/values/impl/hand_count_value.gd" id="3_6a4q0"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="4_cjwk8"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_8ew3l"]
+
+[sub_resource type="Resource" id="Resource_5fmjg"]
+script = ExtResource("3_6a4q0")
+type_filter = 24
+
+[sub_resource type="Resource" id="Resource_7iuk2"]
+script = ExtResource("2_jfkqp")
+base = 4
+per = 5
+unit = SubResource("Resource_5fmjg")
+
+[sub_resource type="Resource" id="Resource_osm0f"]
+script = ExtResource("4_cjwk8")
+amount = SubResource("Resource_7iuk2")
+label = &"block"
+
+[resource]
+script = ExtResource("5_8ew3l")
+id = &"sufferer"
+name = "受難者"
+art = ExtResource("1_jfkqp")
+type = 1
+on_play = Array[ExtResource("1_40oh0")]([SubResource("Resource_osm0f")])
+text = "ブロックを {block} 得る（手札のステータスカード / 呪い 1 枚につき +5）。"

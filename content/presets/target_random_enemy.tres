@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="RandomEnemiesTarget" format=3]
+
+[ext_resource type="Script" path="res://src/content/targeting/impl/random_enemies_target.gd" id="1_seiyt"]
+
+[resource]
+script = ExtResource("1_seiyt")

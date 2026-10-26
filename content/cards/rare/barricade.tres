@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/barricade.png" id="1_diobl"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_kl7d6"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_diobl"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_w6uhx"]
+[ext_resource type="Resource" path="res://content/statuses/barricade.tres" id="4_6yo4p"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_mhvkg"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_1aosc"]
+
+[sub_resource type="Resource" id="Resource_31g00"]
+script = ExtResource("3_w6uhx")
+value = 1
+
+[sub_resource type="Resource" id="Resource_8ndh5"]
+script = ExtResource("2_diobl")
+status = ExtResource("4_6yo4p")
+stacks = SubResource("Resource_31g00")
+target = ExtResource("5_mhvkg")
+
+[resource]
+script = ExtResource("6_1aosc")
+id = &"barricade"
+name = "バリケード"
+art = ExtResource("1_diobl")
+type = 2
+rarity = 3
+cost = 3
+on_play = Array[ExtResource("1_kl7d6")]([SubResource("Resource_8ndh5")])
+text = "ブロックがターン開始時に消えなくなる。"

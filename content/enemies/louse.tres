@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_nd7ix"]
+[ext_resource type="Script" path="res://src/content/ai/impl/scripted_ai.gd" id="2_8sjma"]
+[ext_resource type="Script" path="res://src/content/data/enemy_move.gd" id="3_i5tsp"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="4_pvy56"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_684d2"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_ruh04"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/hp_below_percent_condition.gd" id="7_6r1r2"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="8_pl0gw"]
+[ext_resource type="Resource" path="res://content/cards/status/dazed.tres" id="9_mhgqj"]
+[ext_resource type="Script" path="res://src/content/effects/impl/create_card_effect.gd" id="10_jyi5j"]
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="11_uqqss"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="12_b8eil"]
+
+[sub_resource type="Resource" id="Resource_kwgml"]
+script = ExtResource("2_8sjma")
+phase_thresholds = PackedInt32Array()
+
+[sub_resource type="Resource" id="Resource_7l7rm"]
+script = ExtResource("4_pvy56")
+value = 6
+
+[sub_resource type="Resource" id="Resource_2thns"]
+script = ExtResource("5_684d2")
+amount = SubResource("Resource_7l7rm")
+label = &"damage"
+target = ExtResource("6_ruh04")
+
+[sub_resource type="Resource" id="Resource_fmb3v"]
+script = ExtResource("3_i5tsp")
+id = &"bite"
+name = "斬りつけ"
+effects = Array[ExtResource("1_nd7ix")]([SubResource("Resource_2thns")])
+weight = 75
+
+[sub_resource type="Resource" id="Resource_1lxp0"]
+script = ExtResource("7_6r1r2")
+
+[sub_resource type="Resource" id="Resource_b4dl2"]
+script = ExtResource("4_pvy56")
+value = 6
+
+[sub_resource type="Resource" id="Resource_74eib"]
+script = ExtResource("8_pl0gw")
+amount = SubResource("Resource_b4dl2")
+
+[sub_resource type="Resource" id="Resource_rh522"]
+script = ExtResource("3_i5tsp")
+id = &"curl"
+name = "身構え"
+effects = Array[ExtResource("1_nd7ix")]([SubResource("Resource_74eib")])
+weight = 25
+bonus_weight = 35
+bonus_when = SubResource("Resource_1lxp0")
+max_in_a_row = 1
+
+[sub_resource type="Resource" id="Resource_0tl06"]
+script = ExtResource("4_pvy56")
+value = 1
+
+[sub_resource type="Resource" id="Resource_w4hfb"]
+script = ExtResource("10_jyi5j")
+card = ExtResource("9_mhgqj")
+place = 1
+count = SubResource("Resource_0tl06")
+temporary = true
+
+[sub_resource type="Resource" id="Resource_cyn04"]
+script = ExtResource("3_i5tsp")
+id = &"dust"
+name = "骨粉"
+effects = Array[ExtResource("1_nd7ix")]([SubResource("Resource_w4hfb")])
+weight = 20
+max_in_a_row = 1
+
+[resource]
+script = ExtResource("11_uqqss")
+id = &"louse"
+name = "スケルトン兵"
+hp_max = 15
+moves = Array[ExtResource("3_i5tsp")]([SubResource("Resource_fmb3v"), SubResource("Resource_rh522"), SubResource("Resource_cyn04")])
+ai = SubResource("Resource_kwgml")

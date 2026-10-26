@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_62qub"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/turn_resources.gd" id="2_ah4go"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_37afv"]
+
+[sub_resource type="Resource" id="Resource_orur2"]
+script = ExtResource("2_ah4go")
+draw = 1
+
+[resource]
+script = ExtResource("3_37afv")
+id = &"philosophers_stone"
+name = "賢者の石"
+rarity = 4
+behaviors = Array[ExtResource("1_62qub")]([SubResource("Resource_orur2")])
+text = "毎ターン追加で 1 枚引く。"

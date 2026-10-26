@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/doubt.png" id="1_77j13"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_ptq6e"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_77j13"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_tssnd"]
+[ext_resource type="Resource" path="res://content/statuses/weak.tres" id="4_8ivgc"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_j1fo5"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_wd20y"]
+
+[sub_resource type="Resource" id="Resource_jjc2s"]
+script = ExtResource("3_tssnd")
+value = 1
+
+[sub_resource type="Resource" id="Resource_k838h"]
+script = ExtResource("2_77j13")
+status = ExtResource("4_8ivgc")
+stacks = SubResource("Resource_jjc2s")
+target = ExtResource("5_j1fo5")
+
+[resource]
+script = ExtResource("6_wd20y")
+id = &"doubt"
+name = "疑念"
+art = ExtResource("1_77j13")
+type = 4
+rarity = 4
+cost_mode = 2
+cost = 0
+end_of_turn_in_hand = Array[ExtResource("1_ptq6e")]([SubResource("Resource_k838h")])
+text = "ターン終了時に手札にあれば弱体を 1 得る。"

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/cleave.png" id="1_k4f5b"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_mohg8"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_k4f5b"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_a3ow4"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="4_fgken"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_7n7vk"]
+
+[sub_resource type="Resource" id="Resource_2edrv"]
+script = ExtResource("2_k4f5b")
+value = 11
+
+[sub_resource type="Resource" id="Resource_kk57o"]
+script = ExtResource("3_a3ow4")
+amount = SubResource("Resource_2edrv")
+label = &"damage"
+target = ExtResource("4_fgken")
+
+[resource]
+script = ExtResource("5_7n7vk")
+id = &"cleave_plus"
+name = "なぎ払い+"
+art = ExtResource("1_k4f5b")
+rarity = 4
+on_play = Array[ExtResource("1_mohg8")]([SubResource("Resource_kk57o")])
+text = "敵全体に {damage} ダメージを与える。"

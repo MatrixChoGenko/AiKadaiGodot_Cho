@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EventData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/event_option.gd" id="1_dci60"]
+[ext_resource type="Script" path="res://src/content/run_effects/run_effect.gd" id="2_xolu4"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/hp_run_effect.gd" id="3_yy4nv"]
+[ext_resource type="Script" path="res://src/content/run_effects/impl/add_card_run_effect.gd" id="4_q6p62"]
+[ext_resource type="Script" path="res://src/content/data/event_data.gd" id="5_re018"]
+
+[sub_resource type="Resource" id="Resource_8ggsn"]
+script = ExtResource("3_yy4nv")
+amount = -12
+
+[sub_resource type="Resource" id="Resource_20efm"]
+script = ExtResource("4_q6p62")
+pool = 1
+choose_from = 3
+
+[sub_resource type="Resource" id="Resource_wiyld"]
+script = ExtResource("1_dci60")
+text = "手のひらを切る"
+detail = "HP -12、ランダムな 3 枚から 1 枚を選ぶ"
+effects = Array[ExtResource("2_xolu4")]([SubResource("Resource_8ggsn"), SubResource("Resource_20efm")])
+result_text = "血が石に吸い込まれ、祠の奥から何かが差し出された。"
+
+[sub_resource type="Resource" id="Resource_kkyyq"]
+script = ExtResource("1_dci60")
+text = "立ち去る"
+result_text = "あなたはその場を後にした。"
+
+[resource]
+script = ExtResource("5_re018")
+id = &"shrine_of_blood"
+title = "血の祠"
+body = "苔むした祠に、乾いた血の跡が残っている。捧げ物を求めているようだ。"
+options = Array[ExtResource("1_dci60")]([SubResource("Resource_wiyld"), SubResource("Resource_kkyyq")])

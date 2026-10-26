@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/finisher.png" id="1_be3fa"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_q5t7n"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_be3fa"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_rc08b"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/hp_below_percent_condition.gd" id="4_q2fyk"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_udtoi"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_flncg"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_esug8"]
+
+[sub_resource type="Resource" id="Resource_r6pk1"]
+script = ExtResource("2_be3fa")
+value = 10
+
+[sub_resource type="Resource" id="Resource_r3yoq"]
+script = ExtResource("2_be3fa")
+value = 20
+
+[sub_resource type="Resource" id="Resource_6brmv"]
+script = ExtResource("4_q2fyk")
+on = 1
+
+[sub_resource type="Resource" id="Resource_3qyil"]
+script = ExtResource("3_rc08b")
+when = SubResource("Resource_6brmv")
+then = SubResource("Resource_r3yoq")
+otherwise = SubResource("Resource_r6pk1")
+
+[sub_resource type="Resource" id="Resource_7o616"]
+script = ExtResource("5_udtoi")
+amount = SubResource("Resource_3qyil")
+label = &"damage"
+target = ExtResource("6_flncg")
+
+[resource]
+script = ExtResource("7_esug8")
+id = &"finisher"
+name = "フィニッシャー"
+art = ExtResource("1_be3fa")
+art_focus = 0.25
+cost = 2
+aim = 1
+on_play = Array[ExtResource("1_q5t7n")]([SubResource("Resource_7o616")])
+text = "{damage} ダメージを与える。対象の HP が 50% 未満なら +10。"

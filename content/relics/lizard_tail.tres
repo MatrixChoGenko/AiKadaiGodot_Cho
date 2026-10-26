@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_66fy5"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/grant_status_on_combat_start.gd" id="2_54wnx"]
+[ext_resource type="Resource" path="res://content/statuses/revive.tres" id="3_ew8w0"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="4_4mjme"]
+
+[sub_resource type="Resource" id="Resource_psvyr"]
+script = ExtResource("2_54wnx")
+status = ExtResource("3_ew8w0")
+
+[resource]
+script = ExtResource("4_4mjme")
+id = &"lizard_tail"
+name = "トカゲの尻尾"
+rarity = 3
+behaviors = Array[ExtResource("1_66fy5")]([SubResource("Resource_psvyr")])
+text = "各戦闘で最初に致死ダメージを受けたとき、HP 1 で踏みとどまり HP を 10 回復する。"

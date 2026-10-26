@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_4nok8"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/first_card_of_type_echo.gd" id="2_cg8pe"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_ynuni"]
+
+[sub_resource type="Resource" id="Resource_i63o4"]
+script = ExtResource("2_cg8pe")
+
+[resource]
+script = ExtResource("3_ynuni")
+id = &"echo_charm"
+name = "反響の護符"
+rarity = 3
+behaviors = Array[ExtResource("1_4nok8")]([SubResource("Resource_i63o4")])
+text = "毎ターン最初にプレイするアタックがもう一度解決される。"

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_3iky0"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/devour_misfortune.png" id="1_jxale"]
+[ext_resource type="Script" path="res://src/content/effects/impl/exhaust_effect.gd" id="2_jxale"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="3_0fi65"]
+[ext_resource type="Script" path="res://src/content/values/impl/resolve_stat_value.gd" id="4_gf6q5"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_b66qt"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="6_i4014"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_n2voc"]
+
+[sub_resource type="Resource" id="Resource_ln38o"]
+script = ExtResource("2_jxale")
+type_filter = 24
+
+[sub_resource type="Resource" id="Resource_rpdkd"]
+script = ExtResource("4_gf6q5")
+stat = 2
+
+[sub_resource type="Resource" id="Resource_fmrut"]
+script = ExtResource("3_0fi65")
+per = 7
+unit = SubResource("Resource_rpdkd")
+
+[sub_resource type="Resource" id="Resource_iyo1x"]
+script = ExtResource("5_b66qt")
+amount = SubResource("Resource_fmrut")
+target = ExtResource("6_i4014")
+
+[resource]
+script = ExtResource("7_n2voc")
+id = &"devour_misfortune"
+name = "厄喰らい"
+art = ExtResource("1_jxale")
+rarity = 2
+on_play = Array[ExtResource("1_3iky0")]([SubResource("Resource_ln38o"), SubResource("Resource_iyo1x")])
+text = "手札のステータスカードと呪いをすべて廃棄し、1 枚につき敵全体に 7 ダメージを与える。"

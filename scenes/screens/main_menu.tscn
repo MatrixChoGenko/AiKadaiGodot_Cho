@@ -1,0 +1,147 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/screens/main_menu_screen.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/title/logo.png" id="2_logo"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+show_top_bar = false
+
+[node name="Logo" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_top = 0.05
+anchor_right = 0.38
+anchor_bottom = 0.05
+offset_left = -360.0
+offset_right = 360.0
+offset_bottom = 332.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Menu" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 0.5
+anchor_bottom = 0.55
+offset_left = -260.0
+offset_right = 260.0
+grow_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="ContinueButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonTitle"
+text = "続きから"
+
+[node name="SaveInfo" type="Label" parent="Menu"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.75)
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+horizontal_alignment = 1
+
+[node name="NewRunButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonTitle"
+text = "新しいラン"
+
+[node name="AbandonButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonTitle"
+text = "ランを放棄"
+
+[node name="CompendiumButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonTitle"
+text = "図鑑"
+
+[node name="QuitButton" type="Button" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ButtonTitle"
+text = "終了"
+
+[node name="DebugPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.85)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -430.0
+offset_top = -150.0
+offset_right = -20.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"PanelHud"
+
+[node name="Column" type="VBoxContainer" parent="DebugPanel"]
+layout_mode = 2
+
+[node name="SeedEdit" type="LineEdit" parent="DebugPanel/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+placeholder_text = "シード（空 = ランダム）"
+alignment = 1
+
+[node name="AllCardsCheck" type="CheckBox" parent="DebugPanel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "デバッグ：全カードで開始"
+
+[node name="Hint" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.55)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"LabelSmall"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "操作のヒント"
+horizontal_alignment = 1
+vertical_alignment = 1

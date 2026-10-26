@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_1di7x"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/injury.png" id="1_t1jja"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="2_t1jja"]
+
+[resource]
+script = ExtResource("2_t1jja")
+id = &"injury"
+name = "負傷"
+art = ExtResource("1_t1jja")
+type = 4
+rarity = 4
+cost_mode = 2
+cost = 0

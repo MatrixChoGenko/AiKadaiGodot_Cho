@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_e0k3l"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/strike.png" id="1_jn06u"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_jn06u"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_viu1n"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_3ea8a"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_ksock"]
+[ext_resource type="Resource" path="res://content/cards/starter/strike_plus.tres" id="6_mhex4"]
+
+[sub_resource type="Resource" id="Resource_x7sua"]
+script = ExtResource("2_jn06u")
+value = 6
+
+[sub_resource type="Resource" id="Resource_joclm"]
+script = ExtResource("3_viu1n")
+amount = SubResource("Resource_x7sua")
+label = &"damage"
+target = ExtResource("4_3ea8a")
+
+[resource]
+script = ExtResource("5_ksock")
+id = &"strike"
+name = "ストライク"
+art = ExtResource("1_jn06u")
+art_focus = 0.7
+rarity = 0
+aim = 1
+upgraded = ExtResource("6_mhex4")
+on_play = Array[ExtResource("1_e0k3l")]([SubResource("Resource_joclm")])
+text = "{damage} ダメージを与える。"

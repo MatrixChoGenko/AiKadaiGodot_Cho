@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_lcvad"]
+[ext_resource type="Script" path="res://src/content/ai/impl/scripted_ai.gd" id="2_6e2kq"]
+[ext_resource type="Script" path="res://src/content/data/enemy_move.gd" id="3_bsv01"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="4_gog08"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_4lyha"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="6_d50hc"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="7_0l2m5"]
+[ext_resource type="Resource" path="res://content/statuses/weak.tres" id="8_ah7kg"]
+[ext_resource type="Resource" path="res://content/cards/status/slimed.tres" id="9_hmvbw"]
+[ext_resource type="Script" path="res://src/content/effects/impl/create_card_effect.gd" id="10_syx3q"]
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="11_k5375"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="12_afjw0"]
+
+[sub_resource type="Resource" id="Resource_wyblk"]
+script = ExtResource("2_6e2kq")
+opening = Array[StringName]([&"bite", &"bite", &"corrode", &"spit"])
+loop_opening = true
+phase_thresholds = PackedInt32Array()
+
+[sub_resource type="Resource" id="Resource_uker4"]
+script = ExtResource("4_gog08")
+value = 5
+
+[sub_resource type="Resource" id="Resource_w3s2n"]
+script = ExtResource("5_4lyha")
+amount = SubResource("Resource_uker4")
+label = &"damage"
+target = ExtResource("6_d50hc")
+
+[sub_resource type="Resource" id="Resource_k8n2s"]
+script = ExtResource("3_bsv01")
+id = &"bite"
+name = "刺突"
+effects = Array[ExtResource("1_lcvad")]([SubResource("Resource_w3s2n")])
+
+[sub_resource type="Resource" id="Resource_0bgtb"]
+script = ExtResource("4_gog08")
+value = 1
+
+[sub_resource type="Resource" id="Resource_4jbso"]
+script = ExtResource("7_0l2m5")
+status = ExtResource("8_ah7kg")
+stacks = SubResource("Resource_0bgtb")
+target = ExtResource("6_d50hc")
+
+[sub_resource type="Resource" id="Resource_yej48"]
+script = ExtResource("3_bsv01")
+id = &"corrode"
+name = "毒刃"
+effects = Array[ExtResource("1_lcvad")]([SubResource("Resource_4jbso")])
+
+[sub_resource type="Resource" id="Resource_xdo7r"]
+script = ExtResource("4_gog08")
+value = 2
+
+[sub_resource type="Resource" id="Resource_hp30s"]
+script = ExtResource("10_syx3q")
+card = ExtResource("9_hmvbw")
+count = SubResource("Resource_xdo7r")
+temporary = true
+
+[sub_resource type="Resource" id="Resource_63vly"]
+script = ExtResource("3_bsv01")
+id = &"spit"
+name = "腐液投げ"
+effects = Array[ExtResource("1_lcvad")]([SubResource("Resource_hp30s")])
+
+[resource]
+script = ExtResource("11_k5375")
+id = &"slime"
+name = "骸骨の毒刃使い"
+hp_max = 14
+moves = Array[ExtResource("3_bsv01")]([SubResource("Resource_k8n2s"), SubResource("Resource_yej48"), SubResource("Resource_63vly")])
+ai = SubResource("Resource_wyblk")

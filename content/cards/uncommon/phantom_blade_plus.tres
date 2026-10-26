@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/phantom_blade.png" id="1_j1fxf"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_kpv6s"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_j1fxf"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_jesnq"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="4_kw450"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_14qdg"]
+
+[sub_resource type="Resource" id="Resource_vpcvg"]
+script = ExtResource("2_j1fxf")
+value = 16
+
+[sub_resource type="Resource" id="Resource_ra8ec"]
+script = ExtResource("3_jesnq")
+amount = SubResource("Resource_vpcvg")
+label = &"damage"
+target = ExtResource("4_kw450")
+
+[resource]
+script = ExtResource("5_14qdg")
+id = &"phantom_blade_plus"
+name = "幻影の刃+"
+art = ExtResource("1_j1fxf")
+art_focus = 0.6
+rarity = 4
+cost = 0
+aim = 1
+keywords = 8
+on_play = Array[ExtResource("1_kpv6s")]([SubResource("Resource_ra8ec")])
+text = "{damage} ダメージを与える。"

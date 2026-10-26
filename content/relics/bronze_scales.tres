@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_dtcp0"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/grant_status_on_combat_start.gd" id="2_qv0ad"]
+[ext_resource type="Resource" path="res://content/statuses/thorns.tres" id="3_emltc"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="4_cefod"]
+
+[sub_resource type="Resource" id="Resource_lq88w"]
+script = ExtResource("2_qv0ad")
+status = ExtResource("3_emltc")
+stacks = 3
+
+[resource]
+script = ExtResource("4_cefod")
+id = &"bronze_scales"
+name = "青銅の鱗"
+behaviors = Array[ExtResource("1_dtcp0")]([SubResource("Resource_lq88w")])
+text = "各戦闘の開始時にトゲを 3 得る。"

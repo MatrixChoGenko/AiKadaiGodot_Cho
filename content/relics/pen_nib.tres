@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_tcshk"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/first_card_of_type_cost_down.gd" id="2_e2few"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_1cxoe"]
+
+[sub_resource type="Resource" id="Resource_yury0"]
+script = ExtResource("2_e2few")
+
+[resource]
+script = ExtResource("3_1cxoe")
+id = &"pen_nib"
+name = "ペン先"
+rarity = 2
+behaviors = Array[ExtResource("1_tcshk")]([SubResource("Resource_yury0")])
+text = "毎ターン最初にプレイするアタックのコストが 1 下がる。"

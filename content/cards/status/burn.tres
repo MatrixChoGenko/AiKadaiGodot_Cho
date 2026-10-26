@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/burn.png" id="1_33bgq"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_dl5u3"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_33bgq"]
+[ext_resource type="Script" path="res://src/content/effects/impl/lose_hp_effect.gd" id="3_4cmnn"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="4_xt4uk"]
+
+[sub_resource type="Resource" id="Resource_8wh7k"]
+script = ExtResource("2_33bgq")
+value = 2
+
+[sub_resource type="Resource" id="Resource_la7be"]
+script = ExtResource("3_4cmnn")
+amount = SubResource("Resource_8wh7k")
+
+[resource]
+script = ExtResource("4_xt4uk")
+id = &"burn"
+name = "火傷"
+art = ExtResource("1_33bgq")
+type = 3
+rarity = 4
+cost_mode = 2
+cost = 0
+end_of_turn_in_hand = Array[ExtResource("1_dl5u3")]([SubResource("Resource_la7be")])
+text = "ターン終了時に手札にあれば HP を 2 失う。"

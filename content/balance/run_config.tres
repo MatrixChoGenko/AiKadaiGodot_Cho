@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RunConfig" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/run_config.gd" id="1_tvg20"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="2_gugdx"]
+[ext_resource type="Resource" path="res://content/cards/starter/strike.tres" id="3_e3imo"]
+[ext_resource type="Resource" path="res://content/cards/starter/defend.tres" id="4_8ah2y"]
+[ext_resource type="Resource" path="res://content/cards/starter/bash.tres" id="5_tyjct"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="6_tmrav"]
+[ext_resource type="Resource" path="res://content/relics/burning_blood.tres" id="7_5p3gv"]
+
+[resource]
+script = ExtResource("1_tvg20")
+starting_deck = Array[ExtResource("2_gugdx")]([ExtResource("3_e3imo"), ExtResource("3_e3imo"), ExtResource("3_e3imo"), ExtResource("3_e3imo"), ExtResource("3_e3imo"), ExtResource("4_8ah2y"), ExtResource("4_8ah2y"), ExtResource("4_8ah2y"), ExtResource("4_8ah2y"), ExtResource("5_tyjct")])
+starting_relics = Array[ExtResource("6_tmrav")]([ExtResource("7_5p3gv")])
+card_rarity_weights = PackedInt32Array(60, 32, 8)
+potion_rarity_weights = PackedInt32Array(65, 25, 10)
+relic_rarity_weights = PackedInt32Array(50, 33, 17)
+card_prices = PackedInt32Array(0, 50, 75, 150, 0)
+relic_prices = PackedInt32Array(0, 150, 180, 250, 300, 200)
+potion_prices = PackedInt32Array(50, 75, 100)
+node_weights = PackedInt32Array(40, 26, 19, 32, 30)

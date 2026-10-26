@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_bf6oh"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/opening_move.png" id="1_sc5kt"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_sc5kt"]
+[ext_resource type="Script" path="res://src/content/values/impl/if_value.gd" id="3_u8u8p"]
+[ext_resource type="Script" path="res://src/content/values/impl/played_this_turn_value.gd" id="4_dopjm"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/compare_condition.gd" id="5_bge5c"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="6_sa4o1"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="7_2jmbs"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="8_a0yot"]
+
+[sub_resource type="Resource" id="Resource_by7lj"]
+script = ExtResource("2_sc5kt")
+value = 4
+
+[sub_resource type="Resource" id="Resource_a3fdq"]
+script = ExtResource("2_sc5kt")
+value = 12
+
+[sub_resource type="Resource" id="Resource_006nr"]
+script = ExtResource("4_dopjm")
+
+[sub_resource type="Resource" id="Resource_q03d6"]
+script = ExtResource("2_sc5kt")
+value = 1
+
+[sub_resource type="Resource" id="Resource_ghjap"]
+script = ExtResource("5_bge5c")
+left = SubResource("Resource_006nr")
+op = 1
+right = SubResource("Resource_q03d6")
+
+[sub_resource type="Resource" id="Resource_686eg"]
+script = ExtResource("3_u8u8p")
+when = SubResource("Resource_ghjap")
+then = SubResource("Resource_a3fdq")
+otherwise = SubResource("Resource_by7lj")
+
+[sub_resource type="Resource" id="Resource_0fdsd"]
+script = ExtResource("6_sa4o1")
+amount = SubResource("Resource_686eg")
+label = &"damage"
+target = ExtResource("7_2jmbs")
+
+[resource]
+script = ExtResource("8_a0yot")
+id = &"opening_move"
+name = "先制"
+art = ExtResource("1_sc5kt")
+cost = 0
+aim = 1
+on_play = Array[ExtResource("1_bf6oh")]([SubResource("Resource_0fdsd")])
+text = "{damage} ダメージを与える（このターン最初のカードなら 12）。"

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/scavenger.png" id="1_0csni"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_osmdy"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_0csni"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="3_b8b4k"]
+[ext_resource type="Script" path="res://src/content/values/impl/resolve_stat_value.gd" id="4_j7mk5"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="5_8xng5"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_hcbel"]
+
+[sub_resource type="Resource" id="Resource_ahuex"]
+script = ExtResource("2_0csni")
+allow_fewer = true
+
+[sub_resource type="Resource" id="Resource_fuapa"]
+script = ExtResource("4_j7mk5")
+stat = 2
+
+[sub_resource type="Resource" id="Resource_l22kr"]
+script = ExtResource("3_b8b4k")
+per = 8
+unit = SubResource("Resource_fuapa")
+
+[sub_resource type="Resource" id="Resource_jkpg5"]
+script = ExtResource("5_8xng5")
+amount = SubResource("Resource_l22kr")
+
+[resource]
+script = ExtResource("6_hcbel")
+id = &"scavenger"
+name = "漁る者"
+art = ExtResource("1_0csni")
+type = 1
+cost = 0
+on_play = Array[ExtResource("1_osmdy")]([SubResource("Resource_ahuex"), SubResource("Resource_jkpg5")])
+text = "手札を 1 枚選んで捨て、捨てた 1 枚につきブロックを 8 得る。"

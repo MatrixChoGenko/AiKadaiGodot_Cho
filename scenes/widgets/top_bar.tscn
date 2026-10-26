@@ -1,0 +1,197 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/presentation/widgets/top_bar.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/presentation/widgets/potion_bar.gd" id="2_potions"]
+[ext_resource type="Script" path="res://src/presentation/widgets/glyph_badge.gd" id="3_glyph"]
+[ext_resource type="Script" path="res://src/presentation/widgets/pile_button.gd" id="4_pile"]
+[ext_resource type="Script" path="res://src/presentation/widgets/tip_button.gd" id="5_tip"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/hero.png" id="6_hero"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/heart.png" id="7_heart"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/coin.png" id="8_coin"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/floor.png" id="9_floor"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/deck.png" id="10_deck"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud/gear.png" id="11_gear"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_potion_box"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.07, 0.1, 0.13, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.32, 0.4, 0.46, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flat"]
+
+[node name="TopBar" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 132.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Bar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_type_variation = &"PanelTopBar"
+
+[node name="Row" type="HBoxContainer" parent="Bar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Hero" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "プレイヤー
+騎士。"
+script = ExtResource("3_glyph")
+outline_width = 0.0
+icon = ExtResource("6_hero")
+
+[node name="GapHero" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HpIcon" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "HP
+0 になると敗北する。"
+script = ExtResource("3_glyph")
+outline_width = 0.0
+icon = ExtResource("7_heart")
+
+[node name="HpLabel" type="Label" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38, 0.36, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.03, 0.03, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "80/80"
+vertical_alignment = 1
+
+[node name="GapHp" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GoldIcon" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "ゴールド
+ショップで使う。"
+script = ExtResource("3_glyph")
+outline_width = 0.0
+icon = ExtResource("8_coin")
+
+[node name="GoldLabel" type="Label" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.36, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.06, 0.02, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "99"
+vertical_alignment = 1
+
+[node name="GapGold" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PotionBox" type="PanelContainer" parent="Bar/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_potion_box")
+
+[node name="Potions" type="HBoxContainer" parent="Bar/Row/PotionBox"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_potions")
+
+[node name="GapPotion" type="Control" parent="Bar/Row"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FloorIcon" type="Control" parent="Bar/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("3_glyph")
+outline_width = 0.0
+icon = ExtResource("9_floor")
+
+[node name="FloorLabel" type="Label" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.94, 0.96, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.06, 0.08, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "0"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Bar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DeckButton" type="Button" parent="Bar/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 64)
+layout_mode = 2
+tooltip_text = "デッキ
+クリックで一覧を見る。"
+icon = ExtResource("10_deck")
+script = ExtResource("4_pile")
+badge_at = Vector2(0.76, 0.8)
+badge_radius = 15.0
+
+[node name="SettingsButton" type="Button" parent="Bar/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "設定
+（未実装）"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+icon = ExtResource("11_gear")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_tip")
+
+[node name="Relics" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 1200.0
+offset_bottom = 136.0
+mouse_filter = 2
+theme_override_constants/separation = 6

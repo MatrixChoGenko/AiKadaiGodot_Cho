@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/transcribe.png" id="1_4svlq"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_fj835"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_4svlq"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="3_dy6nj"]
+
+[sub_resource type="Resource" id="Resource_mtpya"]
+script = ExtResource("2_4svlq")
+action = 3
+
+[resource]
+script = ExtResource("3_dy6nj")
+id = &"transcribe"
+name = "写し取り"
+art = ExtResource("1_4svlq")
+type = 1
+rarity = 2
+on_play = Array[ExtResource("1_fj835")]([SubResource("Resource_mtpya")])
+text = "手札を 1 枚選んで複製する（一時）。"

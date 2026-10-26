@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_aurm8"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/turn_resources.gd" id="2_5c81s"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_gai1j"]
+
+[sub_resource type="Resource" id="Resource_61ws5"]
+script = ExtResource("2_5c81s")
+draw = 2
+first_turn_only = true
+
+[resource]
+script = ExtResource("3_gai1j")
+id = &"bag_of_preparation"
+name = "準備袋"
+rarity = 2
+behaviors = Array[ExtResource("1_aurm8")]([SubResource("Resource_61ws5")])
+text = "各戦闘の第 1 ターンに追加で 2 枚引く。"

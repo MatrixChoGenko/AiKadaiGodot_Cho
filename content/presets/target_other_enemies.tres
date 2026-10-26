@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AllEnemiesTarget" format=3]
+
+[ext_resource type="Script" path="res://src/content/targeting/impl/all_enemies_target.gd" id="1_1vsxp"]
+
+[resource]
+script = ExtResource("1_1vsxp")
+exclude_chosen = true

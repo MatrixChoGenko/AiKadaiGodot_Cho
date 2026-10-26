@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/turnabout.png" id="1_7do64"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_q5atc"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_7do64"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_6y2mi"]
+[ext_resource type="Script" path="res://src/content/effects/impl/branch_effect.gd" id="4_8a3k0"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="5_nkfev"]
+[ext_resource type="Script" path="res://src/content/conditions/impl/last_card_type_condition.gd" id="6_0h0o2"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_71nue"]
+
+[sub_resource type="Resource" id="Resource_54y6u"]
+script = ExtResource("2_7do64")
+value = 5
+
+[sub_resource type="Resource" id="Resource_ksgh7"]
+script = ExtResource("3_6y2mi")
+amount = SubResource("Resource_54y6u")
+label = &"block"
+
+[sub_resource type="Resource" id="Resource_xvi1o"]
+script = ExtResource("2_7do64")
+value = 4
+
+[sub_resource type="Resource" id="Resource_vlp27"]
+script = ExtResource("3_6y2mi")
+amount = SubResource("Resource_xvi1o")
+
+[sub_resource type="Resource" id="Resource_17c7a"]
+script = ExtResource("2_7do64")
+value = 1
+
+[sub_resource type="Resource" id="Resource_ocrvw"]
+script = ExtResource("5_nkfev")
+count = SubResource("Resource_17c7a")
+
+[sub_resource type="Resource" id="Resource_7qc2n"]
+script = ExtResource("6_0h0o2")
+
+[sub_resource type="Resource" id="Resource_65ejs"]
+script = ExtResource("4_8a3k0")
+when = SubResource("Resource_7qc2n")
+then = Array[ExtResource("1_q5atc")]([SubResource("Resource_vlp27"), SubResource("Resource_ocrvw")])
+
+[resource]
+script = ExtResource("7_71nue")
+id = &"turnabout"
+name = "転機"
+art = ExtResource("1_7do64")
+type = 1
+on_play = Array[ExtResource("1_q5atc")]([SubResource("Resource_ksgh7"), SubResource("Resource_65ejs")])
+text = "ブロックを {block} 得る。直前のカードがアタックなら、さらにブロックを 4 得て 1 枚引く。"

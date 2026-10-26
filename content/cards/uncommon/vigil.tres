@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/vigil.png" id="1_hqvy2"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_oy6p4"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_hqvy2"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="3_oxoht"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="4_wnf2j"]
+
+[sub_resource type="Resource" id="Resource_ia82o"]
+script = ExtResource("2_hqvy2")
+value = 12
+
+[sub_resource type="Resource" id="Resource_58i5i"]
+script = ExtResource("3_oxoht")
+amount = SubResource("Resource_ia82o")
+label = &"block"
+
+[resource]
+script = ExtResource("4_wnf2j")
+id = &"vigil"
+name = "不寝番"
+art = ExtResource("1_hqvy2")
+art_focus = 0.4
+type = 1
+rarity = 2
+cost = 2
+keywords = 4
+on_play = Array[ExtResource("1_oy6p4")]([SubResource("Resource_58i5i")])
+text = "ブロックを {block} 得る。"

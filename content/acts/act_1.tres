@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ActData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/encounter_data.gd" id="1_r06u5"]
+[ext_resource type="Resource" path="res://content/encounters/guardian.tres" id="2_pa2oo"]
+[ext_resource type="Script" path="res://src/content/data/act_data.gd" id="3_divph"]
+
+[resource]
+script = ExtResource("3_divph")
+id = &"act_1"
+name = "第一幕：尖塔の麓"
+bosses = Array[ExtResource("1_r06u5")]([ExtResource("2_pa2oo")])

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/immolate.png" id="1_08id4"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_q8ci6"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_08id4"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="3_axyco"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="4_bto61"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_7njfj"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_p0h1b"]
+
+[sub_resource type="Resource" id="Resource_5omiq"]
+script = ExtResource("2_08id4")
+value = 7
+
+[sub_resource type="Resource" id="Resource_2pmdr"]
+script = ExtResource("3_axyco")
+amount = SubResource("Resource_5omiq")
+target = ExtResource("4_bto61")
+
+[sub_resource type="Resource" id="Resource_31o17"]
+script = ExtResource("2_08id4")
+value = 8
+
+[sub_resource type="Resource" id="Resource_hxskx"]
+script = ExtResource("3_axyco")
+amount = SubResource("Resource_31o17")
+label = &"damage"
+target = ExtResource("5_7njfj")
+
+[resource]
+script = ExtResource("6_p0h1b")
+id = &"immolate"
+name = "焼却"
+art = ExtResource("1_08id4")
+rarity = 2
+aim = 1
+keywords = 1
+on_play = Array[ExtResource("1_q8ci6")]([SubResource("Resource_hxskx")])
+on_exhaust = Array[ExtResource("1_q8ci6")]([SubResource("Resource_2pmdr")])
+text = "{damage} ダメージを与える。廃棄された時：敵全体に 7 ダメージを与える。"

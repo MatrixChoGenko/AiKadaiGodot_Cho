@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RelicData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_mxds1"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/victory_rewards.gd" id="2_jlv0m"]
+[ext_resource type="Script" path="res://src/content/data/relic_data.gd" id="3_muudx"]
+
+[sub_resource type="Resource" id="Resource_wnl6a"]
+script = ExtResource("2_jlv0m")
+heal = 6
+
+[resource]
+script = ExtResource("3_muudx")
+id = &"burning_blood"
+name = "燃える血"
+rarity = 0
+behaviors = Array[ExtResource("1_mxds1")]([SubResource("Resource_wnl6a")])
+text = "戦闘勝利後に HP を 6 回復する。"

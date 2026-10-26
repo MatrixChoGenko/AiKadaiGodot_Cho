@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PotionData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_w7o6k"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_3shwh"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="3_svbb3"]
+[ext_resource type="Script" path="res://src/content/data/potion_data.gd" id="4_qwhu7"]
+
+[sub_resource type="Resource" id="Resource_8r0g7"]
+script = ExtResource("2_3shwh")
+value = 3
+
+[sub_resource type="Resource" id="Resource_436tq"]
+script = ExtResource("3_svbb3")
+count = SubResource("Resource_8r0g7")
+
+[resource]
+script = ExtResource("4_qwhu7")
+id = &"draw"
+name = "閃きポーション"
+effects = Array[ExtResource("1_w7o6k")]([SubResource("Resource_436tq")])
+text = "3 枚引く。"

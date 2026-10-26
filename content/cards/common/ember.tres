@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/ember.png" id="1_g8s17"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_i6odw"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_g8s17"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="3_b8spi"]
+[ext_resource type="Script" path="res://src/content/effects/impl/block_effect.gd" id="4_554ha"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_2pxn5"]
+
+[sub_resource type="Resource" id="Resource_y0gqe"]
+script = ExtResource("2_g8s17")
+value = 1
+
+[sub_resource type="Resource" id="Resource_7bo0e"]
+script = ExtResource("3_b8spi")
+amount = SubResource("Resource_y0gqe")
+
+[sub_resource type="Resource" id="Resource_u2w12"]
+script = ExtResource("2_g8s17")
+value = 6
+
+[sub_resource type="Resource" id="Resource_ejxik"]
+script = ExtResource("4_554ha")
+amount = SubResource("Resource_u2w12")
+label = &"block"
+
+[resource]
+script = ExtResource("5_2pxn5")
+id = &"ember"
+name = "残り火"
+art = ExtResource("1_g8s17")
+type = 1
+keywords = 1
+on_play = Array[ExtResource("1_i6odw")]([SubResource("Resource_ejxik")])
+on_exhaust = Array[ExtResource("1_i6odw")]([SubResource("Resource_7bo0e")])
+text = "ブロックを {block} 得る。廃棄された時：エネルギーを 1 得る。"

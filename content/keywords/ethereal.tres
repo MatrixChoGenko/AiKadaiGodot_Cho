@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/keyword_data.gd" id="1_rgmar"]
+
+[resource]
+script = ExtResource("1_rgmar")
+id = &"ethereal"
+kind = 8
+name = "エセリアル"
+text = "ターン終了時にまだ手札にあれば、捨てられるのではなくそのまま廃棄される。"

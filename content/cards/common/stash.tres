@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/stash.png" id="1_dlb05"]
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_e11g4"]
+[ext_resource type="Script" path="res://src/content/effects/impl/choose_cards_effect.gd" id="2_dlb05"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_7e5jh"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="4_jpjan"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="5_b01pu"]
+
+[sub_resource type="Resource" id="Resource_kr6ep"]
+script = ExtResource("2_dlb05")
+action = 4
+
+[sub_resource type="Resource" id="Resource_r0y35"]
+script = ExtResource("3_7e5jh")
+value = 1
+
+[sub_resource type="Resource" id="Resource_yy6yq"]
+script = ExtResource("4_jpjan")
+count = SubResource("Resource_r0y35")
+
+[resource]
+script = ExtResource("5_b01pu")
+id = &"stash"
+name = "隠し札"
+art = ExtResource("1_dlb05")
+type = 1
+cost = 0
+on_play = Array[ExtResource("1_e11g4")]([SubResource("Resource_kr6ep"), SubResource("Resource_yy6yq")])
+text = "手札を 1 枚選んで山札の一番上に戻し、1 枚引く。"

@@ -1,0 +1,4 @@
+cardframe02 (user-supplied card frame pack, 2026-10-19).
+The user confirmed that modifying the frames and publishing them (public repo) is allowed.
+frame_*.png are modified by tools/card_frames.py; card_back.png is card_back_player.png (512x720) as is.
+assets/textures/ui/energy_orb.png, intent_attack.png, intent_defend.png come from the same pack (UI Elements).

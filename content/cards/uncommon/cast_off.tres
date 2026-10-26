@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_585ah"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/cast_off.png" id="1_rcbdh"]
+[ext_resource type="Script" path="res://src/content/effects/impl/discard_effect.gd" id="2_rcbdh"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="3_bmmy7"]
+[ext_resource type="Script" path="res://src/content/values/impl/resolve_stat_value.gd" id="4_k3hh1"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="5_rlugs"]
+[ext_resource type="Resource" path="res://content/presets/target_all_enemies.tres" id="6_ucqfp"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="7_baypx"]
+
+[sub_resource type="Resource" id="Resource_fa8c8"]
+script = ExtResource("2_rcbdh")
+
+[sub_resource type="Resource" id="Resource_ka0pm"]
+script = ExtResource("4_k3hh1")
+stat = 2
+
+[sub_resource type="Resource" id="Resource_66efi"]
+script = ExtResource("3_bmmy7")
+per = 4
+unit = SubResource("Resource_ka0pm")
+
+[sub_resource type="Resource" id="Resource_bnvtq"]
+script = ExtResource("5_rlugs")
+amount = SubResource("Resource_66efi")
+target = ExtResource("6_ucqfp")
+
+[resource]
+script = ExtResource("7_baypx")
+id = &"cast_off"
+name = "投げ捨て"
+art = ExtResource("1_rcbdh")
+art_focus = 0.4
+rarity = 2
+on_play = Array[ExtResource("1_585ah")]([SubResource("Resource_fa8c8"), SubResource("Resource_bnvtq")])
+text = "手札をすべて捨て、1 枚につき敵全体に 4 ダメージを与える。"

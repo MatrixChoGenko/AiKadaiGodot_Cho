@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_hhog3"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/patient_strike.png" id="1_ryv7c"]
+[ext_resource type="Script" path="res://src/content/values/impl/scaled_value.gd" id="2_ryv7c"]
+[ext_resource type="Script" path="res://src/content/values/impl/card_retained_turns_value.gd" id="3_r4o6i"]
+[ext_resource type="Script" path="res://src/content/effects/impl/damage_effect.gd" id="4_lyrwe"]
+[ext_resource type="Resource" path="res://content/presets/target_chosen.tres" id="5_l714c"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_517nt"]
+
+[sub_resource type="Resource" id="Resource_yd6k8"]
+script = ExtResource("3_r4o6i")
+
+[sub_resource type="Resource" id="Resource_wvmat"]
+script = ExtResource("2_ryv7c")
+base = 6
+per = 4
+unit = SubResource("Resource_yd6k8")
+
+[sub_resource type="Resource" id="Resource_pdmpx"]
+script = ExtResource("4_lyrwe")
+amount = SubResource("Resource_wvmat")
+label = &"damage"
+target = ExtResource("5_l714c")
+
+[resource]
+script = ExtResource("6_517nt")
+id = &"patient_strike"
+name = "溜め斬り"
+art = ExtResource("1_ryv7c")
+aim = 1
+keywords = 2
+on_play = Array[ExtResource("1_hhog3")]([SubResource("Resource_pdmpx")])
+text = "{damage} ダメージを与える（保留ターン 1 につき +4）。"

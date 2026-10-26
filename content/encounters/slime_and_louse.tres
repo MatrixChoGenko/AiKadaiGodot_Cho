@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EncounterData" format=3]
+
+[ext_resource type="Script" path="res://src/content/data/enemy_data.gd" id="1_hsfrb"]
+[ext_resource type="Resource" path="res://content/enemies/slime.tres" id="2_xhe6x"]
+[ext_resource type="Resource" path="res://content/enemies/louse.tres" id="3_8lwvk"]
+[ext_resource type="Script" path="res://src/content/data/encounter_data.gd" id="4_w6xey"]
+
+[resource]
+script = ExtResource("4_w6xey")
+id = &"slime_and_louse"
+name = "毒刃使いとスケルトン兵"
+enemies = Array[ExtResource("1_hsfrb")]([ExtResource("2_xhe6x"), ExtResource("3_8lwvk")])
+early = true

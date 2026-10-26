@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="PotionData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_45ct6"]
+[ext_resource type="Script" path="res://src/content/effects/impl/apply_status_effect.gd" id="2_y57sp"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="3_j100m"]
+[ext_resource type="Resource" path="res://content/statuses/strength.tres" id="4_ng8ny"]
+[ext_resource type="Resource" path="res://content/presets/target_self.tres" id="5_uhpj8"]
+[ext_resource type="Script" path="res://src/content/data/potion_data.gd" id="6_ktorh"]
+
+[sub_resource type="Resource" id="Resource_efl4q"]
+script = ExtResource("3_j100m")
+value = 2
+
+[sub_resource type="Resource" id="Resource_e7tio"]
+script = ExtResource("2_y57sp")
+status = ExtResource("4_ng8ny")
+stacks = SubResource("Resource_efl4q")
+label = &"strength"
+target = ExtResource("5_uhpj8")
+
+[resource]
+script = ExtResource("6_ktorh")
+id = &"strength"
+name = "筋力ポーション"
+rarity = 1
+effects = Array[ExtResource("1_45ct6")]([SubResource("Resource_e7tio")])
+text = "筋力を {strength} 得る。"

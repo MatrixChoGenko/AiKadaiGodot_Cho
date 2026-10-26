@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CardData" format=3]
+
+[ext_resource type="Script" path="res://src/content/effects/card_effect.gd" id="1_fsyx2"]
+[ext_resource type="Texture2D" path="res://assets/textures/card_art/offering.png" id="1_ocoxf"]
+[ext_resource type="Script" path="res://src/content/values/impl/fixed_value.gd" id="2_ocoxf"]
+[ext_resource type="Script" path="res://src/content/effects/impl/lose_hp_effect.gd" id="3_qlset"]
+[ext_resource type="Script" path="res://src/content/effects/impl/gain_energy_effect.gd" id="4_v307s"]
+[ext_resource type="Script" path="res://src/content/effects/impl/draw_effect.gd" id="5_fitpl"]
+[ext_resource type="Script" path="res://src/content/data/card_data.gd" id="6_u1siy"]
+
+[sub_resource type="Resource" id="Resource_0wqrj"]
+script = ExtResource("2_ocoxf")
+value = 6
+
+[sub_resource type="Resource" id="Resource_fxro0"]
+script = ExtResource("3_qlset")
+amount = SubResource("Resource_0wqrj")
+
+[sub_resource type="Resource" id="Resource_apk5d"]
+script = ExtResource("2_ocoxf")
+value = 2
+
+[sub_resource type="Resource" id="Resource_xd4ht"]
+script = ExtResource("4_v307s")
+amount = SubResource("Resource_apk5d")
+
+[sub_resource type="Resource" id="Resource_gqlon"]
+script = ExtResource("2_ocoxf")
+value = 3
+
+[sub_resource type="Resource" id="Resource_bt4u6"]
+script = ExtResource("5_fitpl")
+count = SubResource("Resource_gqlon")
+
+[resource]
+script = ExtResource("6_u1siy")
+id = &"offering"
+name = "供物"
+art = ExtResource("1_ocoxf")
+art_focus = 0.3
+type = 1
+rarity = 3
+cost = 0
+keywords = 1
+on_play = Array[ExtResource("1_fsyx2")]([SubResource("Resource_fxro0"), SubResource("Resource_xd4ht"), SubResource("Resource_bt4u6")])
+text = "HP を 6 失い、エネルギーを 2 得て、3 枚引く。"

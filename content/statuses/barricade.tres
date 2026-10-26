@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusData" format=3]
+
+[ext_resource type="Script" path="res://src/content/behaviors/combat_behavior.gd" id="1_7botb"]
+[ext_resource type="Script" path="res://src/content/behaviors/impl/keep_block.gd" id="2_t656x"]
+[ext_resource type="Script" path="res://src/content/data/status_data.gd" id="3_yvh1f"]
+
+[sub_resource type="Resource" id="Resource_uvx6j"]
+script = ExtResource("2_t656x")
+
+[resource]
+script = ExtResource("3_yvh1f")
+id = &"barricade"
+name = "バリケード"
+max_stacks = 1
+behaviors = Array[ExtResource("1_7botb")]([SubResource("Resource_uvx6j")])
+text = "ブロックがターン開始時に消えなくなる。"
